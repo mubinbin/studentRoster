@@ -1,8 +1,10 @@
 package com.mb.studentroster.controllers;
 
 
+import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -37,9 +39,9 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/students/new")
-	public String newStudent(@ModelAttribute("student") Student student, Model model) {
+	public String newStudent(@ModelAttribute("student") Student student, HttpSession session) {
 		List<Dorm> dorms = ds.allDorms();
-		model.addAttribute("dorms", dorms);
+		session.setAttribute("dorms", dorms);
 		
 		return "/students/addStudent.jsp";
 	}
@@ -55,17 +57,38 @@ public class StudentController {
 	@RequestMapping("/")
 	public String allStudents(Model model) {
 		List<Student> students = ss.allStudents();
+		Collections.sort(students);
 		model.addAttribute("students", students);
 		return "/students/allStudents.jsp";	
 	}
 	
 	@RequestMapping("/students/{id}")
-	public String studentDetails(@PathVariable("id") Long id, Model model) {
+	public String studentDetails(@ModelAttribute("student") Student student, @PathVariable("id") Long id, Model model) {
+		
+		List<Dorm> dorms = ds.allDorms();
+		model.addAttribute("dorms", dorms);
 		
 		Student curStudent = ss.findStudent(id);
 		model.addAttribute("curStudent", curStudent);
 		return "/students/studentDetails.jsp";
 	}
 	
+	@RequestMapping(value="/students/{id}/adddorm", method=RequestMethod.POST)
+	public String addStudentToDorm(@Valid @ModelAttribute("student") Student student, @PathVariable("id") Long id) {
+		if(student.getDorm() == null) return "/students/" + id;
+		
+		Student studentToChange = ss.findStudent(id);
+		studentToChange.setDorm(student.getDorm());
+		ss.createOrUpdateStudent(studentToChange);
+		return "redirect:/students/" + id;
+	}
 	
+	@RequestMapping("/students/{id}/removedorm")
+	public String removeStudentFromDorm(@PathVariable("id") Long id) {
+		Student s = ss.findStudent(id);
+		Long dormId = s.getDorm().getId();
+		s.setDorm(null);
+		ss.createOrUpdateStudent(s);
+		return "redirect:/dorms/" + dormId;
+	}
 }

@@ -11,25 +11,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="dorms")
-public class Dorm {
+public class Dorm implements Comparable<Dorm>{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Size(min=2, max=200, message="{size.address}")
-	@NotBlank(message="{required.address}")
+	@Size(min=2, max=200, message="Dormity Address must be between {2} and {1} characters!")
 	private String address;
 	
-	@Size(min=2, max =200, message="{size.name}")
-	@NotBlank(message="{required.name}")
+	@Size(min=2, max =200, message="Dormity Name must be between {2} and {1} characters!")
 	private String name;
 	
 	@Column(updatable=false)
@@ -44,6 +41,11 @@ public class Dorm {
 	public Dorm() {
 	}
 	
+	public Dorm(List<Student> students) {
+		super();
+		this.students = students;
+	}
+
 	public Dorm(String address, String name) {
 		this.address = address;
 		this.name = name;
@@ -55,6 +57,11 @@ public class Dorm {
 		this.students = students;
 	}
 
+	@Override
+	public int compareTo(Dorm d) {
+		return this.getName().compareTo(d.getName());
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -79,11 +86,11 @@ public class Dorm {
 		this.name = name;
 	}
 
-	public List<Student> getStudent() {
+	public List<Student> getStudents() {
 		return students;
 	}
 	
-	public void setStudent(List<Student> students){
+	public void setStudents(List<Student> students) {
 		this.students = students;
 	}
 	

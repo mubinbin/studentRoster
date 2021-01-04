@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="`courses`")
-public class Course {
+public class Course implements Comparable<Course>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -58,6 +58,11 @@ public class Course {
 		this.name = name;
 		this.desc = desc;
 		this.students = students;
+	}
+	
+	@Override
+	public int compareTo(Course c) {
+		return this.getName().compareTo(c.getName());
 	}
 
 	public Long getId() {

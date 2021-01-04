@@ -23,7 +23,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="students")
-public class Student {
+public class Student implements Comparable<Student>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,7 +32,7 @@ public class Student {
 	private String firstName;
 	@Size(min = 2, max=200, message="Last Name must be bewteen {2} and {1} characters!")
 	private String lastName;
-	@NotNull(message="Please enter age!")
+
 	private Integer age;
 	
 	@Column(updatable=false)
@@ -60,6 +60,10 @@ public class Student {
 	
 	public Student() {
 	}
+	
+	public Student(Dorm dorm) {
+		this.dorm = dorm;
+	}
 
 	public Student(String firstName, String lastName, Integer age) {
 		this.firstName = firstName;
@@ -72,6 +76,11 @@ public class Student {
 		this.lastName = lastName;
 		this.age = age;
 		this.dorm = dorm;
+	}
+	
+	@Override
+	public int compareTo(Student s) {
+		return this.getFirstName().compareTo(s.getFirstName());
 	}
 
 	public Long getId() {

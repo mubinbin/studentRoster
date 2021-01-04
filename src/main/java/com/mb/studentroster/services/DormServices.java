@@ -1,6 +1,7 @@
 package com.mb.studentroster.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,10 @@ public class DormServices {
 	
 	public Dorm findDorm(String dormName) {
 		return dormRepo.findByName(dormName);
+	}
+	
+	public Optional<Dorm> findDormById(Long id) {
+		return dormRepo.findById(id);
 	}
 	
 	public Dorm createOrUpdateDorm(Dorm d) {

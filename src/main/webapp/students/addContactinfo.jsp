@@ -11,7 +11,7 @@
 </head>
 <body>
 	
-	<p><a href="/">Home Page</a></p>
+	<p><a href="/">All Students</a> | <a href="/alldorms">All Dormities</a> | <a href="/allcourses">All Classes</a></p>
 	
 	<h3> Please enter contact information for <c:out value="${ curStudent.firstName } ${ curStudent.lastName }"/></h3>
 	

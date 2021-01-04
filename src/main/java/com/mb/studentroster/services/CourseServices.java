@@ -26,9 +26,9 @@ public class CourseServices {
 		return course;
 	}
 	
-	public Optional<Course> findCourseWithId(Long id){
+	public Course findCourseWithId(Long id){
 		Optional<Course> optionalCourse = courseRepo.findById(id);
-		return optionalCourse.isPresent()? optionalCourse : null;
+		return optionalCourse.isPresent()? optionalCourse.get() : null;
 	}
 	
 	public Course createOrUpdateCourse(Course c) {

@@ -10,9 +10,9 @@
 	<title>New Student</title>
 </head>
 <body>
+	<p><a href="/">All Students</a> | <a href="/alldorms">All Dormities</a> | <a href="/allcourses">All Classes</a></p>
+
 	<h1>New Student</h1>
-	
-	<p><a href="/">Home Page</a></p>
 	
 	<form:form action="/students" method="post" modelAttribute="student">
 		<p>
@@ -42,6 +42,7 @@
 		<p>
 			<form:label path="dorm">Select a Dorm (optional): </form:label>
 			<form:select path="dorm">
+				<form:option value="" label="--Please Select"/>
 				<form:options items="${ dorms }" itemValue="id" itemLabel="name" />
 			</form:select>
 		</p>
