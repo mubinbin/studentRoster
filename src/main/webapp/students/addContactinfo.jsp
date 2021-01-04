@@ -10,6 +10,9 @@
 	<title>New Contact Information</title>
 </head>
 <body>
+	
+	<p><a href="/">Home Page</a></p>
+	
 	<h3> Please enter contact information for <c:out value="${ curStudent.firstName } ${ curStudent.lastName }"/></h3>
 	
 	<form:form action="/contactinfo" method="post" modelAttribute="contactinfo">

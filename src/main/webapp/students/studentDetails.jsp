@@ -14,6 +14,7 @@
 	<h1><c:out value="${ curStudent.firstName } ${ curStudent.lastName }"/></h1>
 	<p>Age: <c:out value="${ curStudent.age}"/></p>
 	
+	<h3>Contact Information</h3>
 	<c:if test="${ curStudent.contactinfo == null }">
 		<p><a href="/students/${curStudent.id}/contactinfo/new">Add Contact Information</a></p>
 	</c:if>
@@ -25,8 +26,14 @@
 	</c:if>
 
 	<h3>Dormity Information</h3>
-	<p>Stay at: <c:out value="${ curStudent.getDorm().name}"/></p>
-	<p>Address: <c:out value="${ curStudent.getDorm().address}"/></p>
+	<c:if test="${ curStudent.dorm == null }">
+		<p><a href="#">Add Dormity Information</a></p>
+	</c:if>
+	
+	<c:if test="${ curStudent.dorm != null }">
+		<p>Stay at: <c:out value="${ curStudent.dorm.name}"/></p>
+		<p>Address: <c:out value="${ curStudent.dorm.address}"/></p>
+	</c:if>
 
 	<h3>Enrolled Classes: </h3>
 	<table>
