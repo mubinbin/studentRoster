@@ -16,7 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -50,15 +49,17 @@ public class Student implements Comparable<Student>{
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
-		// name for the many to many join table
-		name="`courses_students`",
-		// joinColumns for this class itselft, whereras inverseJoinColumns for the other class
+		name="courses_students",
 		joinColumns = @JoinColumn(name="student_id"),
-		inverseJoinColumns = @JoinColumn(name="`course_id`")	
+		inverseJoinColumns = @JoinColumn(name="course_id")	
 	)
 	private List<Course> courses;
 	
 	public Student() {
+	}
+	
+	public Student(List<Course> courses) {
+		this.courses = courses;
 	}
 	
 	public Student(Dorm dorm) {

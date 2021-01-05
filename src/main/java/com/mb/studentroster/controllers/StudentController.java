@@ -1,6 +1,7 @@
 package com.mb.studentroster.controllers;
 
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,11 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mb.studentroster.models.Contactinfo;
+import com.mb.studentroster.models.Course;
 import com.mb.studentroster.models.Dorm;
 import com.mb.studentroster.models.Student;
 import com.mb.studentroster.services.ContactinfoServices;
 import com.mb.studentroster.services.CourseServices;
+import com.mb.studentroster.services.CourseStudentServices;
 import com.mb.studentroster.services.DormServices;
 import com.mb.studentroster.services.StudentServices;
 
@@ -29,13 +31,13 @@ public class StudentController {
 	private final StudentServices ss;
 	private final DormServices ds;
 	private final CourseServices cs;
-	private final ContactinfoServices cis;
+	private final CourseStudentServices css;
 	
-	public StudentController(ContactinfoServices cis, StudentServices ss, DormServices ds, CourseServices cs) {
+	public StudentController(ContactinfoServices cis, StudentServices ss, DormServices ds, CourseServices cs, CourseStudentServices css) {
 		this.ss = ss;
 		this.ds = ds;
 		this.cs = cs;
-		this.cis = cis;
+		this.css = css;
 	}
 	
 	@RequestMapping("/students/new")
@@ -63,13 +65,23 @@ public class StudentController {
 	}
 	
 	@RequestMapping("/students/{id}")
-	public String studentDetails(@ModelAttribute("student") Student student, @PathVariable("id") Long id, Model model) {
+	public String studentDetails(@ModelAttribute("student") Student student, @PathVariable("id") Long id, Model model, HttpSession session) {
 		
 		List<Dorm> dorms = ds.allDorms();
 		model.addAttribute("dorms", dorms);
 		
 		Student curStudent = ss.findStudent(id);
 		model.addAttribute("curStudent", curStudent);
+		
+		List<Course> allCourses = cs.allCourses();
+		ArrayList<Course> coursesNotEnrolling = new ArrayList<Course>();
+		for(Course c : allCourses) {
+			if(!c.getStudents().contains(curStudent)){
+				coursesNotEnrolling.add(c);
+			}
+		}
+		session.setAttribute("coursesNotEnrolling", coursesNotEnrolling);
+		
 		return "/students/studentDetails.jsp";
 	}
 	
@@ -91,4 +103,28 @@ public class StudentController {
 		ss.createOrUpdateStudent(s);
 		return "redirect:/dorms/" + dormId;
 	}
+	
+	@RequestMapping("/students/dropcourse/{studentId}/{courseId}")
+	public String dropCourse(@PathVariable("studentId") Long studentId, @PathVariable("courseId") Long courseId) {
+		
+		Student theStudent = ss.findStudent(studentId);
+		Course theCourse = cs.findCourseWithId(courseId);
+		
+		css.removeByStudentAndCourse(theStudent, theCourse);
+		return "redirect:/students/" + studentId;
+	}
+	
+	 @RequestMapping(value="/students/addcourses/{id}", method=RequestMethod.POST)
+	 public String addCoursesToStudent(@Valid @ModelAttribute("student") Student s, @PathVariable("id") Long id) {
+		 if(s.getCourses() == null) return "/students/" + id;
+		 
+		 Student theStudent = ss.findStudent(id);
+		 
+		 List<Course> joinedCourseList = theStudent.getCourses(); 
+		 joinedCourseList.addAll(s.getCourses());
+		 theStudent.setCourses(joinedCourseList);;
+		 
+		 ss.createOrUpdateStudent(theStudent);
+		 return "redirect:/students/" + id;
+	 }
 }

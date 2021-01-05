@@ -44,7 +44,5 @@
 	
 		<input type="submit" value="Add Dormity"/>
 	</form:form>
-
-
 </body>
 </html>

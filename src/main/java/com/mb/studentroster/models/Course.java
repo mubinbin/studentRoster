@@ -12,23 +12,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="`courses`")
+@Table(name="courses")
 public class Course implements Comparable<Course>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message="{required.name}")
-	@Size(min = 2, max=200, message="{size.name}")
+	@Size(min = 2, max=200, message="Class Name must be between {2} and {1} characters!")
 	private String name;
-	@Size(min = 10, max=200, message="{size.desc}")
-	private String desc;
+	@Size(min = 10, max=200, message="Class Description must be between {2} and {1} characters!")
+	private String description;
 
 	@Column(updatable=false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -38,25 +36,27 @@ public class Course implements Comparable<Course>{
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
-		// name for the many to many join table
-		name="`courses_students`",
-		// joinColumns for this class itselft, whereras inverseJoinColumns for the other class
-		joinColumns = @JoinColumn(name="`course_id`"),
-		inverseJoinColumns = @JoinColumn(name="student_id")	
-	)
+			name="courses_students",
+			joinColumns = @JoinColumn(name="course_id"),
+			inverseJoinColumns = @JoinColumn(name="student_id")	
+	 )
 	private List<Student> students;
 
 	public Course() {
 	}
+	
+	public Course(List<Student> students) {
+		this.students = students;
+	}
 
 	public Course(String name, String desc) {
 		this.name = name;
-		this.desc = desc;
+		this.description = desc;
 	}
 
 	public Course(String name, String desc, List<Student> students) {
 		this.name = name;
-		this.desc = desc;
+		this.description = desc;
 		this.students = students;
 	}
 	
@@ -81,12 +81,12 @@ public class Course implements Comparable<Course>{
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String desc) {
+		this.description = desc;
 	}
 
 	public Date getCreatedAt() {

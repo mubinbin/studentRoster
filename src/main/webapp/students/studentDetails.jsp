@@ -57,10 +57,23 @@
 
 		<tbody>
 			<c:forEach var="course" items="${ curStudent.courses }">
-				<td><a href="/courses/${course.id}"><c:out value="${ course.name }"/></a></td>
+				<tr>
+					<td><a href="/courses/${course.id}"><c:out value="${ course.name }"/></a></td>
+					<td><a href="/students/dropcourse/${curStudent.id}/${course.id}">Drop</a>
+				</tr>
 			</c:forEach>	
 		</tbody>
 	</table>
+	
+	<hr/>
+	<h3>Add Classes to This Student: </h3>
+	<form:form action="/students/addcourses/${curStudent.id}" method="post" modelAttribute="student">
+		<c:forEach var="course" items="${ coursesNotEnrolling }">
+			<form:checkbox path="courses" value="${course}"/> <c:out value="${ course.name }"/>
+			<br/>
+		</c:forEach>
+		<input type="submit" value="Add Classes"/>
+	</form:form>
 	
 </body>
 </html>

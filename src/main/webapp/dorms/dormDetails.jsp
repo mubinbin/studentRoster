@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
+	<title>Dormity Details</title>
 </head>
 <body>
 	<p><a href="/">All Students</a> | <a href="/alldorms">All Dormities</a> | <a href="/allcourses">All Classes</a></p>
@@ -15,7 +15,7 @@
 	<p>Address: <c:out value="${ curDorm.address }"/></p>
 	
 	<hr/>
-	<p><b>Add Students: </b></p>
+	<h3>Add Students to This Dorm: </h3>
 	<form:form action="/dorms/addstudents/${curDorm.id}" method="post" modelAttribute="dorm">
 		<c:forEach var="student" items="${ studentsDontHaveDorm }">
 			<form:checkbox path="students" value="${student}"/> <c:out value="${ student.firstName } ${ student.lastName }"/>
@@ -24,7 +24,9 @@
 
 		<input type="submit" value="Add"/>
 	</form:form>
+	
 	<hr/>
+	<h3>Students in This Dorm: </h3>
 	<table>
 		<thead>
 			<tr>
