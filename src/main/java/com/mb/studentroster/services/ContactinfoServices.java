@@ -1,6 +1,7 @@
 package com.mb.studentroster.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -26,5 +27,10 @@ public class ContactinfoServices {
 	
 	public void removeContactinfo(Long id) {
 		contactinfoRepo.deleteById(id);
+	}
+	
+	public Contactinfo findContactinfoWithId(Long id){
+		Optional<Contactinfo> optionalContactinfo = contactinfoRepo.findById(id);
+		return optionalContactinfo.isPresent()? optionalContactinfo.get() : null;
 	}
 }

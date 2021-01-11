@@ -69,7 +69,7 @@ public class DormController {
 
     @RequestMapping(value="/dorms/delete/{id}")
     public String removeDorm(@PathVariable("id") Long id) {
-    	Dorm dormToRemove = ds.findDormById(id).get();
+    	Dorm dormToRemove = ds.findDorm(id);
     	for(Student s : dormToRemove.getStudents()) {
     		s.setDorm(null);
     		ss.createOrUpdateStudent(s);
@@ -80,7 +80,7 @@ public class DormController {
     
     @RequestMapping("/dorms/{id}")
     public String dormDetails(@ModelAttribute("dorm") Dorm dorm, @PathVariable("id") Long id, Model model) {
-    	Dorm curDorm = ds.findDormById(id).get();
+    	Dorm curDorm = ds.findDorm(id);
     	
     	List<Student> allStudents = ss.allStudents();
     	ArrayList<Student> studentsDontHaveDorm = new ArrayList<Student>();
@@ -100,7 +100,7 @@ public class DormController {
     public String addStudentsToDorm(@Valid @ModelAttribute("dorm") Dorm dorm, @PathVariable("id") Long id) {
     	if(dorm.getStudents() == null) return "/dorms/" + id;
     	
-    	Dorm theDorm = ds.findDormById(id).get();
+    	Dorm theDorm = ds.findDorm(id);
     	
     	for(Student s : dorm.getStudents()) {
     		s.setDorm(theDorm);

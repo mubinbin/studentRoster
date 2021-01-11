@@ -20,8 +20,14 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
 @Entity
 @Table(name="students")
+//@JsonIdentityInfo(
+//		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+//		  property = "id")
 public class Student implements Comparable<Student>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,14 +46,17 @@ public class Student implements Comparable<Student>{
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
 	
+	@JsonManagedReference
 	@OneToOne(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Contactinfo contactinfo;
 	
+	@JsonManagedReference
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="dorm_id", nullable=true)
 	private Dorm dorm;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@JsonManagedReference
+	@ManyToMany
 	@JoinTable(
 		name="courses_students",
 		joinColumns = @JoinColumn(name="student_id"),

@@ -25,8 +25,9 @@ public class DormServices {
 		return dormRepo.findByName(dormName);
 	}
 	
-	public Optional<Dorm> findDormById(Long id) {
-		return dormRepo.findById(id);
+	public Dorm findDorm(Long id) {
+		Optional<Dorm> optionalDorm = dormRepo.findById(id);
+		return optionalDorm.isPresent()? optionalDorm.get() : null;
 	}
 	
 	public Dorm createOrUpdateDorm(Dorm d) {

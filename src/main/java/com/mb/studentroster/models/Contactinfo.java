@@ -16,10 +16,16 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mb.studentroster.validators.PhoneValidator;
 
 @Entity
 @Table(name="contactinfos")
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 public class Contactinfo {
 
 	@Id
@@ -42,6 +48,7 @@ public class Contactinfo {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
 	
+	@JsonBackReference
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="student_id")
 	private Student student;

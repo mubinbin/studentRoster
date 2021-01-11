@@ -59,6 +59,7 @@ public class StudentController {
 	@RequestMapping("/")
 	public String allStudents(Model model) {
 		List<Student> students = ss.allStudents();
+		System.out.println(students);
 		Collections.sort(students);
 		model.addAttribute("students", students);
 		return "/students/allStudents.jsp";	
