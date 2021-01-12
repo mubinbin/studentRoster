@@ -33,6 +33,7 @@ public class ContactinfoApi {
 	public Contactinfo updateContactinfo(@PathVariable("contactinfoId") Long contactinfoId, @RequestBody Contactinfo contactinfo) {
 		
 		cs.createOrUpdateContactinfo(contactinfo);
-		return contactinfo;
+		
+		return cs.findContactinfoWithId(contactinfoId);
 	}
 }

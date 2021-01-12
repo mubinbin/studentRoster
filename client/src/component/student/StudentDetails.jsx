@@ -16,23 +16,40 @@ const StudentDetails = props =>{
         axios.get("http://localhost:8080/api/students/" + props.id)
         .then(res => {
             setCurStudent(res.data);
-
-            // get current student's contact info
-            axios.get("http://localhost:8080/api/students/" + props.id + "/contactinfo")
-            .then(res => {
-                setContactinfo(res.data);
-                setIsLoaded(true);
-            })
-            .catch(err => {
-                console.log("Error getting current student's contact infomation. Details: " + err);
-            });
         })
         .catch(err=>{
-            console.log("Error getting current sutdent. Details: " + err);
+            console.log("Error on getting current sutdent. Details: " + err);
+        });
+        
+        // get current student's contact info
+        axios.get("http://localhost:8080/api/students/" + props.id + "/contactinfo")
+        .then(res => {
+            setContactinfo(res.data);
+            setIsLoaded(true);
+        })
+        .catch(err => {
+            console.log("Error on getting current student's contact infomation. Details: " + err);
         });
 
         return ()=>{ setCurStudent({}); setContactinfo({}); }
     }, [isLoaded, props.id]);
+
+
+    const updateContactInfo = (updatedContactInfo) => {
+
+        axios.patch("http://localhost:8080/api/contactinfos/" + contactinfo.id, updatedContactInfo, {headers:{
+            "Content-Type":"application/json; charset=utf-8",
+            "Access-Control-Allow-Origin": "*"
+        }})
+
+        .then(res=> {
+            setCurStudent(res.data);
+            setIsLoaded(false);
+        })
+        .catch(err =>{
+            console.log("Error on updating contact infomation. Details: " + err);
+        });
+    }
 
     return(
         <>
@@ -47,31 +64,23 @@ const StudentDetails = props =>{
             <h3>Contact Information</h3>
             {
                 contactinfo?
-                    <StudentContactInfoShow curContactInfo={contactinfo}></StudentContactInfoShow>
+                    <StudentContactInfoShow curContactInfo={contactinfo} updateContactInfo={updateContactInfo}></StudentContactInfoShow>
                     :
                     <StudentContactInfoAdd></StudentContactInfoAdd>
             }
-            
-            
-            
-
+    
             <hr/>
             <h3>Dormity Information</h3>
-
-
 
             <hr/>
             <h3>Enrolled Classes</h3>
 
             </>
             )
-
-
         }
 
         </>
-
-    )
+    );
 }
 
 export default StudentDetails;

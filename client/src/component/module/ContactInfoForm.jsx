@@ -5,13 +5,12 @@ import {TextField, Button} from '@material-ui/core';
 
 const ContactInfoForm = props => {
 
-
-    const [contactInfo, setContactInfo] = useState(props.initialState)
+    const [updatedContactInfo, setUpdatedContactInfo] = useState(props.initialState)
 
     const onChangeHandler = (e) => {
 
-        setContactInfo({
-            ...contactInfo,
+        setUpdatedContactInfo({
+            ...updatedContactInfo,
             [e.target.name]: e.target.value
         });
 
@@ -20,7 +19,7 @@ const ContactInfoForm = props => {
     const onSubmitHandler = (e) => {
 
         e.preventDefault();
-        props.updateContactInfo(contactInfo);
+        props.updateContactInfo(updatedContactInfo);
         props.handleClose();
 
     };
@@ -36,7 +35,7 @@ const ContactInfoForm = props => {
             label="Home Address"
             type="text"
             fullWidth
-            value={contactInfo.homeAddress}
+            value={updatedContactInfo.homeAddress}
             onChange={onChangeHandler}
             />
             <br/>
@@ -48,7 +47,7 @@ const ContactInfoForm = props => {
             label="Email"
             type="text"
             fullWidth
-            value={contactInfo.email}
+            value={updatedContactInfo.email}
             onChange={onChangeHandler}
             />
             <br/>
@@ -60,7 +59,7 @@ const ContactInfoForm = props => {
             label="Phone"
             type="text"
             fullWidth
-            value={contactInfo.phone}
+            value={updatedContactInfo.phone}
             onChange={onChangeHandler}
             />
             <br/>
