@@ -26,7 +26,7 @@ public class StudentApi {
     
     @RequestMapping("/api/students/{id}")
     public Student oneStudent(@PathVariable("id") Long id) {
-    	
-    	return ss.findStudent(id); 
+
+        return ss.findStudent(id); 
     }
 }

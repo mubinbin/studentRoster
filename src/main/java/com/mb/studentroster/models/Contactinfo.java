@@ -16,8 +16,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mb.studentroster.validators.PhoneValidator;
 
@@ -48,7 +48,7 @@ public class Contactinfo {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
 	
-	@JsonBackReference
+	@JsonIgnoreProperties({"contactinfo", "dorm", "courses"})
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="student_id")
 	private Student student;

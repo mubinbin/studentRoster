@@ -15,8 +15,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -42,7 +42,7 @@ public class Dorm implements Comparable<Dorm>{
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
 	
-	@JsonBackReference
+	@JsonIgnoreProperties("dorm")
 	@OneToMany(mappedBy="dorm", fetch=FetchType.LAZY)
 	private List<Student> students;
 	

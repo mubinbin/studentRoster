@@ -12,12 +12,12 @@ const AllStudents = () => {
         axios.get("http://localhost:8080/api/students")
         .then(res => {
             setStudents(res.data);
-            console.log(students)
+            // console.log(students)
             setLoaded(true);
-            console.log(res.data);
+            // console.log(res.data);
         })
         .catch(err => console.log("Error: " + err));
-        return () => {setStudents([]);};
+        return () => { setStudents([]); };
     }, [loaded]);
 
     // pass the students into table component

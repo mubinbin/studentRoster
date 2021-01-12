@@ -17,8 +17,8 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -43,7 +43,7 @@ public class Course implements Comparable<Course>{
 	private Date updatedAt;
 	
 	// for json serialize
-	@JsonBackReference
+	@JsonIgnoreProperties("courses")
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 			name="courses_students",

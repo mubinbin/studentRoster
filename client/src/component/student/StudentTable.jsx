@@ -8,11 +8,12 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import {Link} from "@reach/router";
 
 const columns = [
-    { id: 'name', label: 'Student Name', minWidth: 100 },
-    { id: 'age', label: 'Age', minWidth: 170 },
-    { id: 'actions', label: 'Assigned a Dromity?', minWidth: 170 },
+    { id: 'name', label: 'Student Name', minWidth: 100, fontWeight: "bold"},
+    { id: 'age', label: 'Age', minWidth: 170, fontWeight: "bold" },
+    { id: 'actions', label: 'Assigned a Dromity?', minWidth: 170, fontWeight: "bold" },
 ];
 
 const useStyles = makeStyles({
@@ -49,7 +50,7 @@ export default function StudentTable(props) {
                 {columns.map((column) => (
                     <TableCell
                     key={column.id}
-                    style={{ minWidth: column.minWidth }}
+                    style={{ minWidth: column.minWidth, fontWeight: column.fontWeight }}
                     >
                     {column.label}
                     </TableCell>
@@ -60,7 +61,7 @@ export default function StudentTable(props) {
                 {props.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((student) => {
                 return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={student.id}>
-                        <TableCell>{student.firstName} {student.lastName}</TableCell>
+                        <TableCell><Link to = {"/students/" + student.id}>{student.firstName} {student.lastName}</Link></TableCell>
                         <TableCell>{student.age}</TableCell>
                         <TableCell>
                             {
