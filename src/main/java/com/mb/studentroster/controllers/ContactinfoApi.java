@@ -33,9 +33,10 @@ public class ContactinfoApi {
 		return cs.findContactinfoWithId(id);
 	}
 	
-	@RequestMapping(value="/api/contactinfos/{contactinfoId}", method=RequestMethod.PATCH)
-	public Contactinfo updateContactinfo(@PathVariable("contactinfoId") Long contactinfoId, @RequestBody Contactinfo contactinfo) {
-		
+	@RequestMapping(value="/api/students/{studentId}/contactinfos/{contactinfoId}", method=RequestMethod.PATCH)
+	public Contactinfo updateContactinfo(@PathVariable("studentId") Long studentId, @PathVariable("contactinfoId") Long contactinfoId, @RequestBody Contactinfo contactinfo) {
+		Student curStudent = ss.findStudent(studentId);
+		contactinfo.setStudent(curStudent);
 		cs.createOrUpdateContactinfo(contactinfo);
 		
 		return cs.findContactinfoWithId(contactinfoId);

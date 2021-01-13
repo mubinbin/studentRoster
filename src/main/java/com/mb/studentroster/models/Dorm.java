@@ -42,7 +42,7 @@ public class Dorm implements Comparable<Dorm>{
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
 	
-	@JsonIgnoreProperties("dorm")
+	@JsonIgnoreProperties({"dorm", "courses", "contactinfo"})
 	@OneToMany(mappedBy="dorm", fetch=FetchType.LAZY)
 	private List<Student> students;
 	

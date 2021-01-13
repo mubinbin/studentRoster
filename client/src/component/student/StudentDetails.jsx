@@ -1,19 +1,22 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import StudentContactInfoAddAndShow from "../contactInfo/StudentContactInfoAddAndShow.jsx";
+import DormDetails from "../dorm/DormDetails.jsx";
+import SelectDormForm from "../dorm/SelectDormForm.jsx";
 
 const StudentDetails = props =>{
 
     const [curStudent, setCurStudent] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
-    const [contactinfo, setContactinfo] = useState([]);
+    const [contactinfo, setContactinfo] = useState({});
+    const [dorm, setDorm] = useState({})
     const [newContactInfo, setNewContactInfo] = useState({
         homeAddress: "",
         email:  "",
         phone: "",
-        student_id: props.id
     });
-    
+
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
     useEffect(()=>{
 
@@ -21,19 +24,17 @@ const StudentDetails = props =>{
         axios.get("http://localhost:8080/api/students/" + props.id)
         .then(res => {
             setCurStudent(res.data);
+
+            // get student contact info
+            setContactinfo(res.data.contactinfo);
+
+            // get student dorm
+            setDorm(res.data.dorm)
+
+            setIsLoaded(true);
         })
         .catch(err=>{
             console.log("Error on getting current sutdent. Details: " + err);
-        });
-        
-        // get current student's contact info
-        axios.get("http://localhost:8080/api/students/" + props.id + "/contactinfos")
-        .then(res => {
-            setContactinfo(res.data);
-            setIsLoaded(true);
-        })
-        .catch(err => {
-            console.log("Error on getting current student's contact infomation. Details: " + err);
         });
 
         return ()=>{ setCurStudent({}); setContactinfo({}); }
@@ -42,7 +43,7 @@ const StudentDetails = props =>{
     // update contact info
     const updateContactInfo = (updatedContactInfo) => {
 
-        axios.patch("http://localhost:8080/api/contactinfos/" + contactinfo.id, updatedContactInfo, {headers:{
+        axios.patch("http://localhost:8080/api/students/" + props.id + "/contactinfos/" + contactinfo.id, updatedContactInfo, {headers:{
             "Content-Type":"application/json; charset=utf-8",
             "Access-Control-Allow-Origin": "*"
         }})
@@ -54,7 +55,7 @@ const StudentDetails = props =>{
         .catch(err =>{
             console.log("Error on updating contact infomation. Details: " + err);
         });
-    }
+    };
 
     // add new contact infomation
     const addContactInfo = (updatedContactInfo) => {
@@ -70,7 +71,22 @@ const StudentDetails = props =>{
         .catch(err =>{
             console.log("Error on creating new contact infomation. Details: " + err);
         });
-    }
+    };
+
+    // assign dorm to student
+    const assignDorm = (selectedDorm) => {
+        axios.post("http://localhost:8080/api/students/" + props.id + "/dorms", selectedDorm, {headers:{
+            "Content-Type":"application/json; charset=utf-8",
+            "Access-Control-Allow-Origin": "*"
+        }})
+        .then(res=>{
+            setDorm(res.data);
+            setIsLoaded(false);
+        })
+        .catch(err=>{
+            console.log("Error on assigning dorm. Details: " + err);
+        });
+    };
 
     return(
         <>
@@ -100,6 +116,9 @@ const StudentDetails = props =>{
 
             <hr/>
             <h3>Dormity Information</h3>
+            { dorm && <DormDetails dorm={dorm} /> }
+            
+            <SelectDormForm callBack = {assignDorm} dorm={dorm}/>
 
             <hr/>
             <h3>Enrolled Classes</h3>
@@ -107,7 +126,6 @@ const StudentDetails = props =>{
             </>
             )
         }
-
         </>
     );
 }

@@ -5,7 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import ContactInfoForm from "./ContactInfoForm";
+import ContactInfoForm from "../contactInfo/ContactInfoForm";
 
 export default function Modal(props) {
     const [open, setOpen] = useState(false);
