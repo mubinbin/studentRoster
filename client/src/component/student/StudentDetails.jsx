@@ -1,13 +1,18 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import StudentContactInfoAdd from "../contactInfo/StudentContactInfoAdd.jsx";
-import StudentContactInfoShow from "../contactInfo/StudentContactInfoShow.jsx";
+import StudentContactInfoAddAndShow from "../contactInfo/StudentContactInfoAddAndShow.jsx";
 
 const StudentDetails = props =>{
 
     const [curStudent, setCurStudent] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
     const [contactinfo, setContactinfo] = useState([]);
+    const [newContactInfo, setNewContactInfo] = useState({
+        homeAddress: "",
+        email:  "",
+        phone: "",
+        student_id: props.id
+    });
     
 
     useEffect(()=>{
@@ -22,7 +27,7 @@ const StudentDetails = props =>{
         });
         
         // get current student's contact info
-        axios.get("http://localhost:8080/api/students/" + props.id + "/contactinfo")
+        axios.get("http://localhost:8080/api/students/" + props.id + "/contactinfos")
         .then(res => {
             setContactinfo(res.data);
             setIsLoaded(true);
@@ -34,7 +39,7 @@ const StudentDetails = props =>{
         return ()=>{ setCurStudent({}); setContactinfo({}); }
     }, [isLoaded, props.id]);
 
-
+    // update contact info
     const updateContactInfo = (updatedContactInfo) => {
 
         axios.patch("http://localhost:8080/api/contactinfos/" + contactinfo.id, updatedContactInfo, {headers:{
@@ -51,6 +56,22 @@ const StudentDetails = props =>{
         });
     }
 
+    // add new contact infomation
+    const addContactInfo = (updatedContactInfo) => {
+
+        axios.post("http://localhost:8080/api/students/" + props.id + "/contactinfos", updatedContactInfo, {headers:{
+            "Content-Type":"application/json; charset=utf-8",
+            "Access-Control-Allow-Origin": "*"
+        }})
+        .then(res=> {
+            setCurStudent(res.data);
+            setIsLoaded(false);
+        })
+        .catch(err =>{
+            console.log("Error on creating new contact infomation. Details: " + err);
+        });
+    }
+
     return(
         <>
         {
@@ -64,11 +85,19 @@ const StudentDetails = props =>{
             <h3>Contact Information</h3>
             {
                 contactinfo?
-                    <StudentContactInfoShow curContactInfo={contactinfo} updateContactInfo={updateContactInfo}></StudentContactInfoShow>
+                    <StudentContactInfoAddAndShow 
+                    isNew={false} 
+                    callBack={updateContactInfo} 
+                    contactInfo={contactinfo}
+                    />
                     :
-                    <StudentContactInfoAdd></StudentContactInfoAdd>
+                    <StudentContactInfoAddAndShow 
+                    isNew={true}
+                    callBack={addContactInfo} 
+                    contactInfo={newContactInfo}
+                    />
             }
-    
+
             <hr/>
             <h3>Dormity Information</h3>
 

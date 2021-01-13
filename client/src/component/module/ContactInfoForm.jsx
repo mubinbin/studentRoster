@@ -19,7 +19,7 @@ const ContactInfoForm = props => {
     const onSubmitHandler = (e) => {
 
         e.preventDefault();
-        props.updateContactInfo(updatedContactInfo);
+        props.callBack(updatedContactInfo);
         props.handleClose();
 
     };

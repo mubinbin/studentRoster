@@ -22,8 +22,8 @@ export default function Modal(props) {
 
     return (
         <div>
-        <Button color="primary" onClick={handleClickOpen}>
-            {props.action}
+        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+            <small>{props.action}</small>
         </Button>
         <Dialog
             fullScreen={fullScreen}
@@ -36,8 +36,9 @@ export default function Modal(props) {
             
             <ContactInfoForm
             initialState={props.initialState}
-            updateContactInfo={props.updateContactInfo}
+            callBack={props.callBack}
             handleClose={handleClose}
+            isNew={props.isNew}
             btn={props.action==="Add Contact Information"? "Add Contact Information":"Update Contact Information"}
             />
             

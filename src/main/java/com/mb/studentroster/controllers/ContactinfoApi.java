@@ -8,18 +8,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mb.studentroster.models.Contactinfo;
+import com.mb.studentroster.models.Student;
 import com.mb.studentroster.services.ContactinfoServices;
+import com.mb.studentroster.services.StudentServices;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class ContactinfoApi {
 	private final ContactinfoServices cs;
+	private final StudentServices ss;
 	
-	public ContactinfoApi(ContactinfoServices cs) {
+	public ContactinfoApi(ContactinfoServices cs, StudentServices ss) {
 		this.cs = cs;
+		this.ss = ss;
 	}
 	
-	@RequestMapping("/api/students/{studentId}/contactinfo")
+	@RequestMapping("/api/students/{studentId}/contactinfos")
 	public Contactinfo findByStudetnId(@PathVariable("studentId") Long studentId) {
 		return cs.findByStudent(studentId);
 	}
@@ -35,5 +39,15 @@ public class ContactinfoApi {
 		cs.createOrUpdateContactinfo(contactinfo);
 		
 		return cs.findContactinfoWithId(contactinfoId);
+	}
+	
+	@RequestMapping(value="/api/students/{studentId}/contactinfos", method=RequestMethod.POST)
+	public Contactinfo addContactinfo(@PathVariable("studentId") Long studentId, @RequestBody Contactinfo contactinfo) {
+		
+		Student curStudent = ss.findStudent(studentId);
+		contactinfo.setStudent(curStudent);
+		cs.createOrUpdateContactinfo(contactinfo);
+		
+		return contactinfo;
 	}
 }
