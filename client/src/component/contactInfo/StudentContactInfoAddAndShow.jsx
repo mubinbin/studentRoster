@@ -7,8 +7,8 @@ const StudentContactInfoAddAndShow = props => {
     return(
         <>
         <Modal
-        action="Update Contact Information"
-        modalTitle="Update Contact Information"
+        action={props.isNew? "Add Contact Information" : "Update Contact Information"}
+        modalTitle={props.isNew? "New Contact Information" : "Update Contact Information"}
         callBack={props.callBack}
         initialState={props.contactInfo}
         isNew={props.isNew}

@@ -25,9 +25,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="students")
-//@JsonIdentityInfo(
-//		  generator = ObjectIdGenerators.PropertyGenerator.class, 
-//		  property = "id")
 public class Student implements Comparable<Student>{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -13,17 +13,17 @@ public class StudentRosterApplication {
 		SpringApplication.run(StudentRosterApplication.class, args);
 	}
 	
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-		return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/**")
-						.allowedOrigins("*")
-						.allowedHeaders("*")
-						.allowedMethods("*");
-			}
-		};
-	}
+//	@Bean
+//	public WebMvcConfigurer corsConfigurer() {
+//		return new WebMvcConfigurer() {
+//			@Override
+//			public void addCorsMappings(CorsRegistry registry) {
+//				registry.addMapping("/api/**")
+//						.allowedOrigins("*")
+//						.allowedHeaders("*")
+//						.allowedMethods("PUT", "PATCH", "DELETE", "GET", "POST");
+//			}
+//		};
+//	}
 
 }

@@ -16,16 +16,11 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mb.studentroster.validators.PhoneValidator;
 
 @Entity
 @Table(name="contactinfos")
-@JsonIdentityInfo(
-		  generator = ObjectIdGenerators.PropertyGenerator.class, 
-		  property = "id")
 public class Contactinfo {
 
 	@Id

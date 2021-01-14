@@ -30,15 +30,12 @@ public class DormApi {
 		return ds.allDorms();
 	}
 	
-	@RequestMapping(value="/api/students/{studentId}/dorms", method=RequestMethod.POST)
-	public Dorm assignDormToStudent(@PathVariable("studentId") Long studentId, @RequestBody Dorm d) {
-		Student s = ss.findStudent(studentId);
+	@RequestMapping(value="/api/students/{studentId}/dorms", method=RequestMethod.PUT)
+	public Dorm assignDormToStudent(@PathVariable("studentId") Long id, @RequestBody Student s) {
+		Student theStudent = ss.findStudent(id);
+		theStudent.setDorm(s.getDorm());
+		ss.createOrUpdateStudent(theStudent);
 		
-		d.getStudents().add(s);
-		ds.createOrUpdateDorm(d);
-		s.setDorm(d);
-		ss.createOrUpdateStudent(s);
-		
-		return s.getDorm();
+		return theStudent.getDorm();
 	}
 }

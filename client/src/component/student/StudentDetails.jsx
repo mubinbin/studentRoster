@@ -74,12 +74,10 @@ const StudentDetails = props =>{
     };
 
     // assign dorm to student
-    const assignDorm = (selectedDorm) => {
-        axios.post("http://localhost:8080/api/students/" + props.id + "/dorms", selectedDorm, {headers:{
-            "Content-Type":"application/json; charset=utf-8",
-            "Access-Control-Allow-Origin": "*"
-        }})
+    const assignDorm = (curStudent) => {
+        axios.put("http://localhost:8080/api/students/" + props.id + "/dorms", curStudent)
         .then(res=>{
+            console.log(res.data)
             setDorm(res.data);
             setIsLoaded(false);
         })
@@ -118,7 +116,7 @@ const StudentDetails = props =>{
             <h3>Dormity Information</h3>
             { dorm && <DormDetails dorm={dorm} /> }
             
-            <SelectDormForm callBack = {assignDorm} dorm={dorm}/>
+            <SelectDormForm callBack = {assignDorm} dorm={dorm} curStudent={curStudent}/>
 
             <hr/>
             <h3>Enrolled Classes</h3>

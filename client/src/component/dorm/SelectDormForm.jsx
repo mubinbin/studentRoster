@@ -9,6 +9,7 @@ const SelectDormForm = props =>{
 
     const [allDorms, setAllDorms] = useState([]);
     const [selectedDorm, setSelectedDorm] = useState({});
+    const [curStudent, setCurStudent] = useState(props.curStudent);
 
     useEffect(()=>{
         axios.get("http://localhost:8080/api/dorms")
@@ -25,12 +26,17 @@ const SelectDormForm = props =>{
     },[props.dorm])
 
     const onChangeHandler = e =>{
-        setSelectedDorm(e.target.value);
+        setCurStudent({
+            ...curStudent,
+            [e.target.name]: e.target.value
+        });
+        //console.log(curStudent)
     };
 
     const onSubmitHandler = e =>{
         e.preventDefault();
-        props.callBack(selectedDorm)
+        console.log("submitting")
+        props.callBack(curStudent)
     };
 
     return(
@@ -40,6 +46,8 @@ const SelectDormForm = props =>{
             <FormControl style={{minWidth: 200, marginBottom: "20px"}}>
                 <InputLabel>Assign a Dormity</InputLabel>
                 <Select
+                name="dorm"
+                displayEmpty
                 onChange={onChangeHandler}
                 >
                     {allDorms.map((dorm, i)=>{
