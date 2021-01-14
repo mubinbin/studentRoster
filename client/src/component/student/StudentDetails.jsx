@@ -7,6 +7,7 @@ import SelectDormForm from "../dorm/SelectDormForm.jsx";
 const StudentDetails = props =>{
 
     const [curStudent, setCurStudent] = useState({});
+    const [enrolling, setEnrolling] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [contactinfo, setContactinfo] = useState({});
     const [dorm, setDorm] = useState({})
@@ -29,7 +30,10 @@ const StudentDetails = props =>{
             setContactinfo(res.data.contactinfo);
 
             // get student dorm
-            setDorm(res.data.dorm)
+            setDorm(res.data.dorm);
+
+            // get student enrolling courses
+            setEnrolling(res.data.courses);
 
             setIsLoaded(true);
         })
@@ -50,6 +54,7 @@ const StudentDetails = props =>{
 
         .then(res=> {
             setCurStudent(res.data);
+            
             setIsLoaded(false);
         })
         .catch(err =>{
@@ -77,7 +82,6 @@ const StudentDetails = props =>{
     const assignDorm = (curStudent) => {
         axios.put("http://localhost:8080/api/students/" + props.id + "/dorms", curStudent)
         .then(res=>{
-            console.log(res.data)
             setDorm(res.data);
             setIsLoaded(false);
         })
@@ -120,7 +124,19 @@ const StudentDetails = props =>{
 
             <hr/>
             <h3>Enrolled Classes</h3>
-
+            {
+                enrolling.length ===0 ?
+                <p>No enrolling classes yet</p>
+                :
+                enrolling.map((course, i)=>{
+                    return(
+                        <>
+                        <p key={i}>{course.name}</p>
+                        <p key={i+1}>{course.decription}</p>
+                        </>
+                    );
+                })
+            }
             </>
             )
         }
