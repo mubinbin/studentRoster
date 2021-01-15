@@ -30,12 +30,10 @@ const SelectDormForm = props =>{
             ...curStudent,
             [e.target.name]: e.target.value
         });
-        //console.log(curStudent)
     };
 
     const onSubmitHandler = e =>{
         e.preventDefault();
-        console.log("submitting")
         props.callBack(curStudent)
     };
 

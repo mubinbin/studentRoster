@@ -43,7 +43,7 @@ public class Course implements Comparable<Course>{
 	private Date updatedAt;
 	
 	// for json serialize
-	@JsonIgnoreProperties("courses")
+	@JsonIgnoreProperties({"courses", "dorm", "contactinfo"})
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
 			name="courses_students",

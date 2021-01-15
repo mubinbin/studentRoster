@@ -3,11 +3,13 @@ import axios from "axios";
 import StudentContactInfoAddAndShow from "../contactInfo/StudentContactInfoAddAndShow.jsx";
 import DormDetails from "../dorm/DormDetails.jsx";
 import SelectDormForm from "../dorm/SelectDormForm.jsx";
+import {Link} from "@reach/router";
+import RemoveCourseStudent from "../course/RemoveCourseStudent.jsx";
 
 const StudentDetails = props =>{
 
     const [curStudent, setCurStudent] = useState({});
-    const [enrolling, setEnrolling] = useState([]);
+    const [enrolledCourses, setEnrolledCourses] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [contactinfo, setContactinfo] = useState({});
     const [dorm, setDorm] = useState({})
@@ -33,7 +35,7 @@ const StudentDetails = props =>{
             setDorm(res.data.dorm);
 
             // get student enrolling courses
-            setEnrolling(res.data.courses);
+            setEnrolledCourses(res.data.courses);
 
             setIsLoaded(true);
         })
@@ -90,6 +92,10 @@ const StudentDetails = props =>{
         });
     };
 
+    const updateDom = (courseId) =>{
+        setEnrolledCourses(enrolledCourses.filter(course => course.id !== courseId));
+    };
+
     return(
         <>
         {
@@ -123,20 +129,26 @@ const StudentDetails = props =>{
             <SelectDormForm callBack = {assignDorm} dorm={dorm} curStudent={curStudent}/>
 
             <hr/>
-            <h3>Enrolled Classes</h3>
+            <h3>Enrolled Classes: </h3>
             {
-                enrolling.length ===0 ?
+                enrolledCourses.length ===0 ?
                 <p>No enrolling classes yet</p>
                 :
-                enrolling.map((course, i)=>{
+                enrolledCourses.map((course, i)=>{
                     return(
                         <>
-                        <p key={i}>{course.name}</p>
-                        <p key={i+1}>{course.decription}</p>
+                        <span key={i}><Link to={"/courses/" + course.id}>{course.name}</Link></span> | 
+                        <RemoveCourseStudent studentId={props.id} courseId={course.id} updateDom={updateDom} fromStudentDetails={true}/>
+                        <br/>
                         </>
                     );
                 })
             }
+
+            <hr/>
+            <h3>Add Classes to StudentContactInfoAddAndShow</h3>
+
+            
             </>
             )
         }
