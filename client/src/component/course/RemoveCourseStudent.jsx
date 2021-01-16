@@ -7,9 +7,9 @@ const RemoveCourseStudent = props =>{
         e.preventDefault();
         axios.delete(`http://localhost:8080/api/courses/removestudent/${props.studentId}/${props.courseId}`)
         .then(res=>{
-            console.log("Successfully remove student form course");
+
             if(props.fromStudentDetails){
-                props.updateDom(props.courseId);
+                props.updateDom(res.data);
             }else{
                 props.updateDom(props.studentId)
             }

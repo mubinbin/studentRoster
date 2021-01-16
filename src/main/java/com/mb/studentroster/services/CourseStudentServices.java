@@ -23,4 +23,10 @@ public class CourseStudentServices {
 		CourseStudent csToRemove = this.findByStudentAndCourse(s, c);
 		courseStudentRepo.delete(csToRemove);
 	}
+
+	public CourseStudent newCourseStudent (Student s, Course c) {
+		CourseStudent courseStudent = new CourseStudent(s,c);
+		courseStudentRepo.save(courseStudent);
+		return courseStudent;
+	}
 }

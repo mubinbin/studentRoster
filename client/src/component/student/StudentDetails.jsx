@@ -5,11 +5,13 @@ import DormDetails from "../dorm/DormDetails.jsx";
 import SelectDormForm from "../dorm/SelectDormForm.jsx";
 import {Link} from "@reach/router";
 import RemoveCourseStudent from "../course/RemoveCourseStudent.jsx";
+import AvailableCourses from "../course/AvailableCourses.jsx";
 
 const StudentDetails = props =>{
 
     const [curStudent, setCurStudent] = useState({});
     const [enrolledCourses, setEnrolledCourses] = useState([]);
+    const [availableCourses, setAvailableCourses] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [contactinfo, setContactinfo] = useState({});
     const [dorm, setDorm] = useState({})
@@ -18,8 +20,6 @@ const StudentDetails = props =>{
         email:  "",
         phone: "",
     });
-
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
 
     useEffect(()=>{
 
@@ -43,7 +43,17 @@ const StudentDetails = props =>{
             console.log("Error on getting current sutdent. Details: " + err);
         });
 
-        return ()=>{ setCurStudent({}); setContactinfo({}); }
+        // get unerolled courses
+        axios.get("http://localhost:8080/api/courses/students/" + props.id)
+        .then(res=>{
+            setAvailableCourses(res.data);
+            setIsLoaded(true);
+        })
+        .catch(err=>{
+            console.log("Error on getting available courses. Details: " + err);
+        });
+
+        return ()=>{ setCurStudent({}); setContactinfo({}); setDorm({}); setAvailableCourses([]); }
     }, [isLoaded, props.id]);
 
     // update contact info
@@ -92,8 +102,9 @@ const StudentDetails = props =>{
         });
     };
 
-    const updateDom = (courseId) =>{
-        setEnrolledCourses(enrolledCourses.filter(course => course.id !== courseId));
+    const updateDom = (courseRemoved) =>{
+        setEnrolledCourses(enrolledCourses.filter(course => course.id !== courseRemoved.id));
+        setAvailableCourses([...availableCourses, courseRemoved])
     };
 
     return(
@@ -147,8 +158,12 @@ const StudentDetails = props =>{
 
             <hr/>
             <h3>Add Classes to StudentContactInfoAddAndShow</h3>
-
-            
+            <AvailableCourses 
+            studentId = {props.id} 
+            setEnrolledCourses = {setEnrolledCourses}
+            setAvailableCourses = {setAvailableCourses}
+            availableCourses = {availableCourses}
+            />
             </>
             )
         }
