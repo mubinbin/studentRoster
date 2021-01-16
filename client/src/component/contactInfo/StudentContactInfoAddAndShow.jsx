@@ -1,6 +1,8 @@
 import React from "react";
 import Modal from "../module/Modal.jsx";
-import ContactInforDetails from "./ContactInfoDetails.jsx";
+import ContactInfoDetails from "./ContactInfoDetails.jsx";
+import ContactInfoForm from "./ContactInfoForm.jsx";
+
 
 const StudentContactInfoAddAndShow = props => {
     
@@ -9,13 +11,18 @@ const StudentContactInfoAddAndShow = props => {
         <Modal
         action={props.isNew? "Add Contact Information" : "Update Contact Information"}
         modalTitle={props.isNew? "New Contact Information" : "Update Contact Information"}
-        callBack={props.callBack}
-        initialState={props.contactInfo}
-        isNew={props.isNew}
-        />
+        >
+            <ContactInfoForm
+            btn={props.isNew? "Add Contact Information" : "Update Contact Information"}
+            initialState={props.contactInfo}
+            callBack={props.callBack}
+            isNew={props.isNew}
+            />
+        </Modal>
+
         {
             !props.isNew &&
-            <ContactInforDetails contactIfo={props.contactInfo}/>
+            <ContactInfoDetails contactIfo={props.contactInfo}/>
         }
         </>
     );

@@ -17,11 +17,8 @@ const ContactInfoForm = props => {
     };
 
     const onSubmitHandler = (e) => {
-
         e.preventDefault();
         props.callBack(updatedContactInfo);
-        props.handleClose();
-
     };
 
     return(
@@ -66,8 +63,6 @@ const ContactInfoForm = props => {
 
             <div style={{padding:"15px 15px 15px 0"}}>
                 <Button type="submit" variant="contained" color="primary">{props.btn}</Button>
-                <span className="col-sm-2"> </span>
-                <Button onClick={props.handleClose} variant="contained" color="secondary">Cancle</Button>
             </div>
         </form>
     )

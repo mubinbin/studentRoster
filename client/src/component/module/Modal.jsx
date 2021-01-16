@@ -33,15 +33,10 @@ export default function Modal(props) {
         >
             <DialogTitle id="responsive-dialog-title">{props.modalTitle}</DialogTitle>
             <DialogContent>
+
+            {props.children}
             
-            <ContactInfoForm
-            initialState={props.initialState}
-            callBack={props.callBack}
-            handleClose={handleClose}
-            isNew={props.isNew}
-            btn={props.action==="Add Contact Information"? "Add Contact Information":"Update Contact Information"}
-            />
-            
+            <Button onClick={handleClose} variant="contained" color="secondary">Cancle</Button>
             </DialogContent>
         </Dialog>
         </div>

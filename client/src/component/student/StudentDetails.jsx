@@ -158,12 +158,17 @@ const StudentDetails = props =>{
 
             <hr/>
             <h3>Add Classes to StudentContactInfoAddAndShow</h3>
-            <AvailableCourses 
-            studentId = {props.id} 
-            setEnrolledCourses = {setEnrolledCourses}
-            setAvailableCourses = {setAvailableCourses}
-            availableCourses = {availableCourses}
-            />
+            {
+                availableCourses?
+                    <AvailableCourses 
+                    studentId = {props.id} 
+                    setEnrolledCourses = {setEnrolledCourses}
+                    setAvailableCourses = {setAvailableCourses}
+                    availableCourses = {availableCourses}
+                    />
+                    :
+                    <p>No Class Avaiable at This Time</p>
+            }
             </>
             )
         }
