@@ -49,7 +49,7 @@ const AvailableCourses = props =>{
             setSelectedCourses(selectedCourses.filter(courseId => courseId!== checkedCourseId));
         }
     };
-    console.log(selectedCourses)
+    
     const onSubmitHandler = (e) =>{
         e.preventDefault();
         axios.patch("http://localhost:8080/api/courses/addstudent/" + props.studentId, selectedCourses)
