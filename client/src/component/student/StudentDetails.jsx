@@ -6,6 +6,7 @@ import SelectDormForm from "../dorm/SelectDormForm.jsx";
 import {Link} from "@reach/router";
 import RemoveCourseStudent from "../course/RemoveCourseStudent.jsx";
 import AvailableCourses from "../course/AvailableCourses.jsx";
+import CreateOrEditStudent from "./CreateOrEditStudent.jsx";
 
 const StudentDetails = props =>{
 
@@ -102,6 +103,7 @@ const StudentDetails = props =>{
         });
     };
 
+    // update enrolledCourses and availableCourses
     const updateDom = (courseRemoved) =>{
         setEnrolledCourses(enrolledCourses.filter(course => course.id !== courseRemoved.id));
         setAvailableCourses([...availableCourses, courseRemoved])
@@ -115,6 +117,11 @@ const StudentDetails = props =>{
             <>
             <h1>{curStudent.firstName} {curStudent.lastName}</h1>
             <p><b>Age: </b>{curStudent.age}</p>
+            
+            <CreateOrEditStudent
+            curStudent = {curStudent}
+            setCurStudent = {setCurStudent}
+            />
             
             <hr/>
             <h3>Contact Information</h3>

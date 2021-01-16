@@ -32,8 +32,21 @@ public class StudentApi {
         return ss.findStudent(id);
     }
 
-    @RequestMapping(value = "/api/students", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/students/new", method = RequestMethod.POST)
     public Student newStudent(@RequestBody Student student) {
+    	
         return ss.createOrUpdateStudent(student);
+    }
+
+    @RequestMapping(value = "/api/students/edit/{id}", method = RequestMethod.PATCH)
+    public Student editStudent(@PathVariable("id") Long id, @RequestBody Student student) {
+        Student studentToChange = ss.findStudent(id);
+        
+        studentToChange.setAge(student.getAge());
+        studentToChange.setFirstName(student.getFirstName());
+        studentToChange.setLastName(student.getLastName());
+    	
+    	ss.createOrUpdateStudent(studentToChange);
+        return studentToChange;
     }
 }

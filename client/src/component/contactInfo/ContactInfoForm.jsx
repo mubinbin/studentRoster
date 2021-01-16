@@ -19,6 +19,7 @@ const ContactInfoForm = props => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
         props.callBack(updatedContactInfo);
+        props.handleClose();
     };
 
     return(
@@ -38,7 +39,6 @@ const ContactInfoForm = props => {
             <br/>
 
             <TextField
-            autoFocus
             margin="dense"
             name="email"
             label="Email"
@@ -50,7 +50,6 @@ const ContactInfoForm = props => {
             <br/>
 
             <TextField
-            autoFocus
             margin="dense"
             name="phone"
             label="Phone"

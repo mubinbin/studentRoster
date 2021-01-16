@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import StudentTable from "./StudentTable.jsx"
+import StudentTable from "./StudentTable.jsx";
 
 const AllStudents = () => {
 
@@ -12,9 +12,7 @@ const AllStudents = () => {
         axios.get("http://localhost:8080/api/students")
         .then(res => {
             setStudents(res.data);
-            // console.log(students)
             setLoaded(true);
-            // console.log(res.data);
         })
         .catch(err => console.log("Error: " + err));
         return () => { setStudents([]); };

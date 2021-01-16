@@ -4,11 +4,13 @@ import AllStudents from "./component/student/AllStudents.jsx";
 import StudentDetails from"./component/student/StudentDetails.jsx";
 import CourseDetails from "./component/course/CourseDetails";
 import NavBar from "./component/module/NavBar";
+import CreateOrEditStudent from "./component/student/CreateOrEditStudent";
 
 function App() {
   return (
     <div className="App">
       <NavBar>
+      <CreateOrEditStudent />
       <Router>
         <AllStudents path = "/" />
         <StudentDetails path = "/students/:id" />
