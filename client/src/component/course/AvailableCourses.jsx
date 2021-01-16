@@ -4,25 +4,9 @@ import CheckBox from "../module/CheckBox.jsx";
 
 const AvailableCourses = props =>{
 
-    // const [availableCourses, setAvailableCourses] = useState(props.avaialbleCourses);
-    // const [isLoaded, setIsLoaded] = useState(false);
     const [checkedAll, setCheckedAll] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
     const [selectedCourses, setSelectedCourses] = useState([]);
-
-    // useEffect(()=>{
-
-    //     axios.get("http://localhost:8080/api/courses/students/" + props.studentId)
-    //     .then(res=>{
-    //         setAvailableCourses(res.data);
-    //         setIsLoaded(true);
-    //     })
-    //     .catch(err=>{
-    //         console.log("Error on getting available courses. Details: " + err);
-    //     })
-
-    //     return( () => setAvailableCourses([]) );
-
-    // }, [props.studentId, isLoaded])
 
     const onChangeHandler = (e) => {
         
@@ -49,15 +33,17 @@ const AvailableCourses = props =>{
             setSelectedCourses(selectedCourses.filter(courseId => courseId!== checkedCourseId));
         }
     };
-    
+
     const onSubmitHandler = (e) =>{
         e.preventDefault();
         axios.patch("http://localhost:8080/api/courses/addstudent/" + props.studentId, selectedCourses)
         .then(res=>{
             props.setEnrolledCourses(res.data[0]);
             props.setAvailableCourses(res.data[1]);
+            // reset the selected course array
             setSelectedCourses([]);
             setCheckedAll(false);
+            setIsLoaded(false);
         })
         .catch(err=>{
             console.log("Error on add courses. Details: " + err);
@@ -75,10 +61,12 @@ const AvailableCourses = props =>{
                         return(
                             <>
                                 <CheckBox 
-                                key={i} 
-                                item={course} 
-                                checkedAll={checkedAll}
-                                callBack={addToSelectedCourses}
+                                key = {i} 
+                                item = {course} 
+                                checkedAll = {checkedAll}
+                                callBack = {addToSelectedCourses}
+                                isLoaded = {isLoaded}
+                                setIsLoaded = {setIsLoaded}
                                 />
                                 <br/>
                             </>

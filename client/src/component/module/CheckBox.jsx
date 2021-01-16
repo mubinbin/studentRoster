@@ -6,7 +6,8 @@ const CheckBox = props => {
 
     useEffect(()=>{
         setIsChecked(props.checkedAll);
-    }, [props.checkedAll]);
+        props.setIsLoaded(true);
+    }, [props.checkedAll, props.isLoaded]);
 
     const onChangeHandler = (e) =>{
         setIsChecked(!isChecked);
@@ -15,6 +16,9 @@ const CheckBox = props => {
 
     return(
         <>
+        {
+            props.isLoaded &&
+            <>
             <input 
             type="checkbox"
             value={props.item.id}
@@ -22,6 +26,8 @@ const CheckBox = props => {
             onChange={onChangeHandler}
             />
             <span> {props.item.name}</span>
+            </>
+        }
         </>
     );
 };
