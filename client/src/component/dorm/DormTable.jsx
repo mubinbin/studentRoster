@@ -12,7 +12,6 @@ import {Link} from "@reach/router";
 
 const columns = [
     { id: 'name', label: 'Dorm Name', minWidth: 100, fontWeight: "bold"},
-    { id: 'address', label: 'Address', minWidth: 170, fontWeight: "bold" },
     { id: 'students', label: 'Total Students', minWidth: 100, fontWeight: "bold"},
     { id: 'actions', label: 'Action', minWidth: 170, fontWeight: "bold" },
 ];
@@ -63,7 +62,6 @@ export default function DormTable(props) {
                 return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={dorm.id}>
                         <TableCell><Link to = {"/dorms/" + dorm.id}>{dorm.name}</Link></TableCell>
-                        <TableCell>{dorm.address}</TableCell>
                         <TableCell>{dorm.students.length}</TableCell>
                         <TableCell>Delete dorm placeholder</TableCell>
                     </TableRow>

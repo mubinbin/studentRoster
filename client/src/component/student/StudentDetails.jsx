@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import StudentContactInfoAddAndShow from "../contactInfo/StudentContactInfoAddAndShow.jsx";
-import DormDetails from "../dorm/DormDetails.jsx";
+import DormDetailsShow from "../dorm/DormDetailsShow.jsx";
 import SelectDormForm from "../dorm/SelectDormForm.jsx";
 import {Link, navigate} from "@reach/router";
 import RemoveCourseStudent from "../course/RemoveCourseStudent.jsx";
@@ -158,7 +158,7 @@ const StudentDetails = props =>{
 
             <hr/>
             <h3>Dormity Information</h3>
-            { dorm && <DormDetails dorm={dorm} /> }
+            { dorm && <DormDetailsShow dorm={dorm} /> }
             
             <SelectDormForm callBack = {assignDorm} dorm={dorm} curStudent={curStudent}/>
 

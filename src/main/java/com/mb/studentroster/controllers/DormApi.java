@@ -29,6 +29,11 @@ public class DormApi {
 	public List<Dorm> allDorms(){
 		return ds.allDorms();
 	}
+
+	@RequestMapping("/api/dorms/{id}")
+	public Dorm findDorm(@PathVariable("id") Long id) {
+		return ds.findDorm(id);
+	}
 	
 	@RequestMapping(value="/api/students/{studentId}/dorms", method=RequestMethod.PUT)
 	public Dorm assignDormToStudent(@PathVariable("studentId") Long id, @RequestBody Student s) {
