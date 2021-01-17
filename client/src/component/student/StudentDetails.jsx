@@ -3,7 +3,7 @@ import axios from "axios";
 import StudentContactInfoAddAndShow from "../contactInfo/StudentContactInfoAddAndShow.jsx";
 import DormDetails from "../dorm/DormDetails.jsx";
 import SelectDormForm from "../dorm/SelectDormForm.jsx";
-import {Link} from "@reach/router";
+import {Link, navigate} from "@reach/router";
 import RemoveCourseStudent from "../course/RemoveCourseStudent.jsx";
 import AvailableCourses from "../course/AvailableCourses.jsx";
 import CreateOrEditStudent from "./CreateOrEditStudent.jsx";
@@ -109,6 +109,18 @@ const StudentDetails = props =>{
         setAvailableCourses([...availableCourses, courseRemoved])
     };
 
+    // delete this student
+    const deleteStudent = (e) => {
+        e.preventDefault();
+        axios.delete("http://localhost:8080/api/students/" + props.id)
+        .then(()=>{
+            navigate("/");
+        })
+        .catch(err=>{
+            console.log("Error on deleting student. Details: " + err);
+        });
+    };
+
     return(
         <>
         {
@@ -117,6 +129,10 @@ const StudentDetails = props =>{
             <>
             <h1>{curStudent.firstName} {curStudent.lastName}</h1>
             <p><b>Age: </b>{curStudent.age}</p>
+
+            <div>
+                <button onClick={deleteStudent}>DELETE STUDENT</button>
+            </div>
             
             <CreateOrEditStudent
             curStudent = {curStudent}

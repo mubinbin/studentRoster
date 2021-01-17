@@ -49,4 +49,9 @@ public class StudentApi {
     	ss.createOrUpdateStudent(studentToChange);
         return studentToChange;
     }
+
+    @RequestMapping(value="/api/students/{id}", method=RequestMethod.DELETE)
+    public void deleteStudent(@PathVariable("id") Long id) {
+        ss.removeStudent(id);
+    }
 }
