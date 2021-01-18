@@ -80,7 +80,7 @@ const AvailableStudents = props => {
                 }
                 </tbody>
             </table>
-            <input type="submit" value="Add Students" />
+            <input type="submit" value="ADD STUDENT" />
         </form>
     );
 };

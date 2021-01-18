@@ -16,7 +16,7 @@ const RemoveStudentFromDorm = props => {
     
     return(
         <button onClick = {removeStudentFromDorm}>
-            Remove
+            REMOVE
         </button>
     );
 };

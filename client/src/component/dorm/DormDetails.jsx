@@ -90,7 +90,7 @@ const DormDetails = props => {
                 }
                 <hr/>
 
-                <h3>Add Students to Dorm</h3>
+                <h3>Add Students to Dorm: </h3>
                 <AvailableStudents
                 items = "dorms"
                 itemId = {props.id}

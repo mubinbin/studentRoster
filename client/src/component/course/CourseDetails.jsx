@@ -3,11 +3,13 @@ import axios from "axios";
 import {Link} from "@reach/router";
 import RemoveCourseStudent from "./RemoveCourseStudent.jsx";
 import CreateOrEditCourse from "./CreateOrEditCourse.jsx";
+import AvailableStudents from "../student/AvailableStudents.jsx";
 
 const CourseDetails = props => {
 
     const [curCourse, setCurCourse] = useState({});
     const [enrollingStudents, setEnrollingStudent] = useState([]);
+    const [studentNotEnrolling, setStudentNotEnrolling] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(()=>{
@@ -16,16 +18,29 @@ const CourseDetails = props => {
         .then(res=>{
             setCurCourse(res.data);
             setEnrollingStudent(res.data.students);
-            setIsLoaded(true);
         })
         .catch(err=>{
             console.log("Error on getting course details. Details: " + err)
         });
+        
+        axios.get("http://localhost:8080/api/students/courses/" + props.id)
+        .then(res=>{
+            setStudentNotEnrolling(res.data);
+            setIsLoaded(true);
+        })
+        .catch(err=>{
+            console.log("Error on getting students not enrolling this class. Details: " + err);
+        });
 
+        return (()=>{ setCurCourse({}); setEnrollingStudent([]); setStudentNotEnrolling([]); })
     },[props.id, isLoaded]);
 
-    const updateDom = (studentId) => {
-        setEnrollingStudent(enrollingStudents.filter(student => student.id !== studentId));
+    const updateDom = (removedStudent) => {
+        setEnrollingStudent(enrollingStudents.filter(student => student.id !== removedStudent.id));
+        setStudentNotEnrolling([
+            ...studentNotEnrolling,
+            removedStudent
+        ]);
     };
 
     return(
@@ -45,7 +60,9 @@ const CourseDetails = props => {
 
                 <h3>Students Enrolling: </h3>
                 {
-
+                    enrollingStudents.length === 0?
+                    <p>This class has no students yet</p>
+                    :
                     <table style={{margin: "auto"}}>
                         <tbody>
                         {
@@ -73,6 +90,13 @@ const CourseDetails = props => {
                 }
 
                 <h3>Add Students to Class: </h3>
+                <AvailableStudents
+                items = "courses"
+                itemId = {props.id}
+                setNotAvailableStudents = {setEnrollingStudent}
+                setAvailableStudents = {setStudentNotEnrolling}
+                availableStudents = {studentNotEnrolling}
+                />
                 </>
 
         }

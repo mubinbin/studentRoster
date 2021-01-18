@@ -9,9 +9,9 @@ const RemoveCourseStudent = props =>{
         .then(res=>{
 
             if(props.fromStudentDetails){
-                props.updateDom(res.data);
+                props.updateDom(res.data[0]);
             }else{
-                props.updateDom(props.studentId)
+                props.updateDom(res.data[1])
             }
         })
         .catch(err=>{
@@ -22,7 +22,7 @@ const RemoveCourseStudent = props =>{
     return(
         <div>
             <button onClick={onClickHandler}>
-                {props.fromStudentDetails? "Drop Course" : "Remove Student"}
+                {props.fromStudentDetails? "DROP" : "REMOVE"}
             </button>
         </div>
 

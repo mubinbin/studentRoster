@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mb.studentroster.models.Course;
 import com.mb.studentroster.models.Dorm;
 import com.mb.studentroster.models.Student;
+import com.mb.studentroster.services.CourseServices;
+import com.mb.studentroster.services.CourseStudentServices;
 import com.mb.studentroster.services.DormServices;
 import com.mb.studentroster.services.StudentServices;
 
@@ -20,10 +23,14 @@ import com.mb.studentroster.services.StudentServices;
 public class StudentApi {
     private final StudentServices ss;
     private final DormServices ds;
+    private final CourseServices cs;
+    private final CourseStudentServices css;
 
-    public StudentApi(StudentServices ss, DormServices ds) {
+    public StudentApi(StudentServices ss, DormServices ds, CourseServices cs, CourseStudentServices css) {
         this.ss = ss;
         this.ds = ds;
+        this.cs = cs;
+        this.css = css;
     }
 
     @RequestMapping("/api/students")
@@ -89,5 +96,38 @@ public class StudentApi {
 		ans.add(this.studentsNoDorm());
 
 		return ans;
+	}
+    
+    @RequestMapping(value="/api/courses/addstudents/{courseId}", method=RequestMethod.PATCH)
+	public List<List<Student>> addCoursesToStudent(@PathVariable("courseId") Long courseId, @RequestBody List<Long> selectedStudents){
+
+		Course theCourse = cs.findCourseWithId(courseId);
+		
+		for (Long studentId : selectedStudents) {
+			Student studentToAdd = ss.findStudent(studentId);
+			css.newCourseStudent(studentToAdd, theCourse);
+		}
+
+		ArrayList<List<Student>> ans = new ArrayList<List<Student>>();
+		ans.add(theCourse.getStudents());
+		ans.add(this.studentsNotEnrolling(courseId));
+
+		return ans;
+	}
+    
+    @RequestMapping("/api/students/courses/{courseId}")
+	public List<Student> studentsNotEnrolling(@PathVariable("courseId") Long courseId){
+		
+		Course curCourse = cs.findCourseWithId(courseId);
+		
+		ArrayList<Student> availableStudents = new ArrayList<Student>();
+		List<Student> allStudents = ss.allStudents();
+		
+		for(Student s : allStudents) {
+			if(!curCourse.getStudents().contains(s)) {
+				availableStudents.add(s);
+			}
+		}
+		return availableStudents;
 	}
 }

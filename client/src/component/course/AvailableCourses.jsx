@@ -36,7 +36,7 @@ const AvailableCourses = props =>{
 
     const onSubmitHandler = (e) =>{
         e.preventDefault();
-        axios.patch("http://localhost:8080/api/courses/addstudents/" + props.studentId, selectedCourses)
+        axios.patch("http://localhost:8080/api/students/addcourses/" + props.studentId, selectedCourses)
         .then(res=>{
             props.setEnrolledCourses(res.data[0]);
             props.setAvailableCourses(res.data[1]);
@@ -80,7 +80,7 @@ const AvailableCourses = props =>{
                 }
                 </tbody>
             </table>
-            <input type="submit" value="Enroll Classes" />
+            <input type="submit" value="ENROLL CLASSES" />
         </form>
     );
 };

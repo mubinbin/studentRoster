@@ -55,16 +55,20 @@ public class CourseApi {
 	}
 	
 	@RequestMapping(value="/api/courses/removestudent/{studentId}/{courseId}", method=RequestMethod.DELETE)
-	public Course dropCourse(@PathVariable("studentId") Long studentId, @PathVariable("courseId") Long courseId) {
+	public List<Object> dropCourse(@PathVariable("studentId") Long studentId, @PathVariable("courseId") Long courseId) {
 			
 		Student theStudent = ss.findStudent(studentId);
 		Course theCourse = cs.findCourseWithId(courseId);
-			
+		
+		ArrayList<Object> newList = new ArrayList<Object>();
+		newList.add(theCourse);
+		newList.add(theStudent);
+		
 		css.removeByStudentAndCourse(theStudent, theCourse);
-		return theCourse;
+		return newList;
 	}
 
-	@RequestMapping(value="/api/courses/addstudents/{studentId}", method=RequestMethod.PATCH)
+	@RequestMapping(value="/api/students/addcourses/{studentId}", method=RequestMethod.PATCH)
 	public List<List<Course>> addCoursesToStudent(@PathVariable("studentId") Long studentId, @RequestBody List<Long> selectedCourses){
 
 		Student theStudent = ss.findStudent(studentId);
