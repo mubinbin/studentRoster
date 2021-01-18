@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import DormDetailsShow from "./DormDetailsShow";
-// import DormDetailsShow from "./DormDetailsShow.jsx";
+import CreateOrEditDorm from "./CreateOrEditDorm.jsx";
 
 const DormDetails = props => {
 
@@ -25,7 +25,10 @@ const DormDetails = props => {
         <>
         {
             isLoaded && 
-                <DormDetailsShow dorm ={curDorm} />
+                <>
+                <DormDetailsShow dorm = {curDorm} />
+                <CreateOrEditDorm  curDorm = {curDorm} />
+                </>
         }
         </>
     );

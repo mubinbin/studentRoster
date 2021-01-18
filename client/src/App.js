@@ -7,12 +7,16 @@ import DormDetails from "./component/dorm/DormDetails.jsx";
 import CourseDetails from "./component/course/CourseDetails.jsx";
 import NavBar from "./component/module/NavBar";
 import CreateOrEditStudent from "./component/student/CreateOrEditStudent.jsx";
+import CreateOrEditDorm from "./component/dorm/CreateOrEditDorm.jsx";
 
 function App() {
   return (
     <div className="App">
       <NavBar>
-      <CreateOrEditStudent />
+      <div style={{display: "flex", justifyContent:"space-evenly"}}>
+        <CreateOrEditStudent />
+        <CreateOrEditDorm />    
+      </div>
       <Router>
         <AllStudents path = "/" />
         <StudentDetails path = "/students/:id" />
