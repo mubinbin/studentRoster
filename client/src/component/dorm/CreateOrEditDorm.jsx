@@ -14,7 +14,7 @@ const CreateOrEditDorm = props => {
     const addNewDorm = (dorm) =>{
         axios.post("http://localhost:8080/api/dorms/new", dorm)
         .then(res=>{
-            navigate("/dorms");
+            navigate("/dorms/" + res.data.id);
         })
         .catch(err=>{
             console.log("Error on creating new dorm . Details: " + err);
@@ -25,7 +25,7 @@ const CreateOrEditDorm = props => {
     const editDorm = (dorm) =>{
         axios.patch("http://localhost:8080/api/dorms/" + props.curDorm.id, dorm)
         .then(res=>{
-            props.setcurDorm(res.data);
+            props.setCurDorm(res.data);
         })
         .catch(err=>{
             console.log("Error on editing dorm . Details: " + err);
@@ -39,7 +39,7 @@ const CreateOrEditDorm = props => {
             <>
                 <Modal
                 action = "Edit Dorm"
-                modalTitile = "Eidt Dorm" 
+                modalTitle = "Eidt Dorm" 
                 >
                     <DormForm
                     initialState = {props.curDorm}
@@ -51,8 +51,8 @@ const CreateOrEditDorm = props => {
                 :
             <>
                 <Modal
-                action = "Create New Dorm"
-                modalTitile = "Create New Dorm" 
+                action = "Add New Dorm"
+                modalTitle = "Add New Dorm" 
                 >
                     <DormForm
                     initialState = {newDorm}

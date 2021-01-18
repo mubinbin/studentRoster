@@ -43,4 +43,18 @@ public class DormApi {
 		
 		return theStudent.getDorm();
 	}
+	
+	@RequestMapping(value="/api/dorms/new", method=RequestMethod.POST)
+	public Dorm newDorm(@RequestBody Dorm dorm){
+		return ds.createOrUpdateDorm(dorm);
+	}
+
+	@RequestMapping(value="/api/dorms/{id}", method=RequestMethod.PATCH)
+	public Dorm eidtDorm(@PathVariable("id") Long id, @RequestBody Dorm dorm) {
+		Dorm dormToChange = ds.findDorm(id);
+		dormToChange.setName(dorm.getName());
+		dormToChange.setAddress(dorm.getAddress());
+		return dormToChange;
+	}
+	
 }
