@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import {Link} from "@reach/router";
+import Delete from "../module/Delete.jsx";
 
 const columns = [
     { id: 'name', label: 'course Name', minWidth: 100, fontWeight: "bold"},
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function courseTable(props) {
+export default function CourseTable(props) {
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -63,7 +64,13 @@ export default function courseTable(props) {
                     <TableRow hover role="checkbox" tabIndex={-1} key={course.id}>
                         <TableCell><Link to = {"/courses/" + course.id}>{course.name}</Link></TableCell>
                         <TableCell>{course.students.length}</TableCell>
-                        <TableCell>Delete course placeholder</TableCell>
+                        <TableCell>
+                            <Delete 
+                            callBack = {props.callBack}
+                            items = "courses"
+                            itemId = {course.id}
+                            />
+                        </TableCell>
                     </TableRow>
                 );
                 })}

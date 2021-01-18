@@ -20,11 +20,17 @@ const AllDorms = props => {
         return ( () => {setAllDorms([])} )
     }, [isLoaded])
 
+    const updateDom = removedDormId => {
+        setAllDorms(allDorms.filter(dorm=> 
+            dorm.id !== removedDormId
+        ));
+    };
+
     return(
         <>
         {
             isLoaded &&
-                <DormTable data= {allDorms}/>
+                <DormTable callBack = {updateDom} data= {allDorms}/>
         }
         </>
     );

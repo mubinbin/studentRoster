@@ -92,4 +92,9 @@ public class CourseApi {
 		courseToChange.setName(course.getName());	courseToChange.setDescription(course.getDescription());
 		return courseToChange;
 	}
+
+	@RequestMapping(value="/api/courses/{id}", method=RequestMethod.DELETE)
+	public void deleteCourse(@PathVariable("id") Long id) {
+		cs.removeCourse(id);
+	}
 }

@@ -20,11 +20,17 @@ const AllCourses = props => {
         return ( () => {setAllCourses([])} )
     }, [isLoaded])
 
+    const updateDom = removeCourseID => {
+        setAllCourses(allCourses.filter(course=>
+            course.id !== removeCourseID
+        ));
+    };
+
     return(
         <>
         {
             isLoaded &&
-                <CourseTable data= {allCourses}/>
+                <CourseTable callBack={updateDom} data= {allCourses}/>
         }
         </>
     );

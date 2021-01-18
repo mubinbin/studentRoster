@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import {Link} from "@reach/router";
+import Delete from "../module/Delete.jsx";
 
 const columns = [
     { id: 'name', label: 'Dorm Name', minWidth: 100, fontWeight: "bold"},
@@ -63,7 +64,13 @@ export default function DormTable(props) {
                     <TableRow hover role="checkbox" tabIndex={-1} key={dorm.id}>
                         <TableCell><Link to = {"/dorms/" + dorm.id}>{dorm.name}</Link></TableCell>
                         <TableCell>{dorm.students.length}</TableCell>
-                        <TableCell>Delete dorm placeholder</TableCell>
+                        <TableCell>
+                            <Delete 
+                            callBack={props.callBack}
+                            items="dorms" 
+                            itemId={dorm.id}
+                            />
+                        </TableCell>
                     </TableRow>
                 );
                 })}

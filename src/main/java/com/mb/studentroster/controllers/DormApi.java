@@ -57,4 +57,16 @@ public class DormApi {
 		return dormToChange;
 	}
 	
+	@RequestMapping(value="/api/dorms/{id}", method = RequestMethod.DELETE)
+	public void deleteDorm(@PathVariable("id") Long id){
+		
+		Dorm dormToRemove = ds.findDorm(id);
+		
+		for(Student s : dormToRemove.getStudents()) {
+    		s.setDorm(null);
+    		ss.createOrUpdateStudent(s);
+		}
+		
+		ds.removeDorm(id);
+	}
 }
