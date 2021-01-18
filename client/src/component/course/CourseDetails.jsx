@@ -43,20 +43,36 @@ const CourseDetails = props => {
                 />
                 <hr/>
 
-                <h3>Student Enrolling: </h3>
+                <h3>Students Enrolling: </h3>
                 {
-                    enrollingStudents.map((student, i)=>{
-                        return(
-                            <>
-                            <span key={i}><Link to={"/students/" + student.id}>{student.firstName} {student.lastName}</Link></span> | 
-                            <RemoveCourseStudent studentId={student.id} courseId={props.id} updateDom={updateDom} fromStudentDetails={false}/>
-                            <br/>
-                            </>
-                        );
-                    })
+
+                    <table style={{margin: "auto"}}>
+                        <tbody>
+                        {
+                            enrollingStudents.map((student, i)=>{
+                                return(
+                                    <tr>
+                                        <td key={i}>
+                                            <Link to={"/students/" + student.id}>{student.firstName} {student.lastName}</Link>
+                                        </td>
+                                            
+                                        <td>
+                                            <RemoveCourseStudent 
+                                            studentId={student.id} 
+                                            courseId={props.id} 
+                                            updateDom={updateDom} 
+                                            fromStudentDetails={false}
+                                            />
+                                        </td>
+                                    </tr>
+                                );
+                            })
+                        }
+                        </tbody>
+                    </table>
                 }
 
-                <h3>Add Student to Class: </h3>
+                <h3>Add Students to Class: </h3>
                 </>
 
         }

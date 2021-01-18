@@ -168,19 +168,34 @@ const StudentDetails = props =>{
                 enrolledCourses.length ===0 ?
                 <p>No enrolling classes yet</p>
                 :
-                enrolledCourses.map((course, i)=>{
-                    return(
-                        <>
-                        <span key={i}><Link to={"/courses/" + course.id}>{course.name}</Link></span> | 
-                        <RemoveCourseStudent studentId={props.id} courseId={course.id} updateDom={updateDom} fromStudentDetails={true}/>
-                        <br/>
-                        </>
-                    );
-                })
+                <table style={{margin: "auto"}}>
+                    <tbody>
+                    {
+                        enrolledCourses.map((course, i)=>{
+                            return(
+                                <tr>
+                                    <td key={i}>
+                                        <Link to={"/courses/" + course.id}>{course.name}</Link>
+                                    </td>
+
+                                    <td>
+                                        <RemoveCourseStudent
+                                        studentId={props.id} 
+                                        courseId={course.id} 
+                                        updateDom={updateDom} 
+                                        fromStudentDetails={true}
+                                        />
+                                    </td>
+                                </tr>
+                            );
+                        })
+                    }
+                    </tbody>
+                </table>
             }
 
             <hr/>
-            <h3>Add Classes to StudentContactInfoAddAndShow</h3>
+            <h3>Add Classes to Student</h3>
             {
                 availableCourses?
                     <AvailableCourses 

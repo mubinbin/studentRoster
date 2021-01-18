@@ -58,7 +58,7 @@ public class DormApi {
 	}
 	
 	@RequestMapping(value="/api/dorms/{id}", method = RequestMethod.DELETE)
-	public void deleteDorm(@PathVariable("id") Long id){
+	public void deleteDorm(@PathVariable("id") Long id) {
 		
 		Dorm dormToRemove = ds.findDorm(id);
 		
@@ -68,5 +68,14 @@ public class DormApi {
 		}
 		
 		ds.removeDorm(id);
+	}
+
+	@RequestMapping("/api/dorms/removestudent/{studentId}")
+	public void removeStudentFromDorm(@PathVariable("studentId") Long studentId) {
+		
+		Student studentRemoveFromDorm = ss.findStudent(studentId);
+
+		studentRemoveFromDorm.setDorm(null);
+		ss.createOrUpdateStudent(studentRemoveFromDorm);
 	}
 }

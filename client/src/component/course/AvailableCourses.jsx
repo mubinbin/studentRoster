@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import CheckBox from "../module/CheckBox.jsx";
 
@@ -40,6 +40,7 @@ const AvailableCourses = props =>{
         .then(res=>{
             props.setEnrolledCourses(res.data[0]);
             props.setAvailableCourses(res.data[1]);
+            
             // reset the selected course array
             setSelectedCourses([]);
             setCheckedAll(false);
