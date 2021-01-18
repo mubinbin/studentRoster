@@ -64,7 +64,7 @@ public class CourseApi {
 		return theCourse;
 	}
 
-	@RequestMapping(value="/api/courses/addstudent/{studentId}", method=RequestMethod.PATCH)
+	@RequestMapping(value="/api/courses/addstudents/{studentId}", method=RequestMethod.PATCH)
 	public List<List<Course>> addCoursesToStudent(@PathVariable("studentId") Long studentId, @RequestBody List<Long> selectedCourses){
 
 		Student theStudent = ss.findStudent(studentId);

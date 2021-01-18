@@ -71,11 +71,12 @@ public class DormApi {
 	}
 
 	@RequestMapping("/api/dorms/removestudent/{studentId}")
-	public void removeStudentFromDorm(@PathVariable("studentId") Long studentId) {
+	public Student removeStudentFromDorm(@PathVariable("studentId") Long studentId) {
 		
 		Student studentRemoveFromDorm = ss.findStudent(studentId);
 
 		studentRemoveFromDorm.setDorm(null);
 		ss.createOrUpdateStudent(studentRemoveFromDorm);
+		return studentRemoveFromDorm;
 	}
 }

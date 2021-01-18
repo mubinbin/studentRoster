@@ -2,55 +2,55 @@ import React, {useState} from "react";
 import axios from "axios";
 import CheckBox from "../module/CheckBox.jsx";
 
-const AvailableCourses = props =>{
+const AvailableStudents = props => {
 
     const [checkedAll, setCheckedAll] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [selectedCourses, setSelectedCourses] = useState([]);
-
+    const [selectedStudents, setSelectedStudents] = useState([]);
+    
     const onChangeHandler = (e) => {
         
         setCheckedAll(!checkedAll);
         if(e.target.checked){
-            for(let course of props.availableCourses){
-                if(!selectedCourses.includes(course.id)){
-                    selectedCourses.push(course.id)
+            for(let student of props.availableStudents){
+                if(!selectedStudents.includes(student.id)){
+                    selectedStudents.push(student.id)
                 }
             }
         }else{
-            setSelectedCourses([]);
+            setSelectedStudents([]);
         }
     };
-    
-    const addToSelectedCourses = (isChecked, checkedCourseId) => {
-        checkedCourseId = Number(checkedCourseId); 
+
+    const addToSelectedStudents = (isChecked, checkedStudentId) => {
+        checkedStudentId = Number(checkedStudentId); 
         if(isChecked){
-            setSelectedCourses([
-                ...selectedCourses,
-                checkedCourseId
+            setSelectedStudents([
+                ...selectedStudents,
+                checkedStudentId
             ])
         }else{
-            setSelectedCourses(selectedCourses.filter(courseId => courseId!== checkedCourseId));
+            setSelectedStudents(selectedStudents.filter(studentId => studentId !== checkedStudentId));
         }
     };
 
     const onSubmitHandler = (e) =>{
         e.preventDefault();
-        axios.patch("http://localhost:8080/api/courses/addstudents/" + props.studentId, selectedCourses)
+        axios.patch(`http://localhost:8080/api/${props.items}/addstudents/${props.itemId}`, selectedStudents)
         .then(res=>{
-            props.setEnrolledCourses(res.data[0]);
-            props.setAvailableCourses(res.data[1]);
+            props.setNotAvailableStudents(res.data[0]);
+            props.setAvailableStudents(res.data[1]);
             
             // reset the selected course array
-            setSelectedCourses([]);
+            setSelectedStudents([]);
             setCheckedAll(false);
             setIsLoaded(false);
         })
         .catch(err=>{
-            console.log("Error on add courses. Details: " + err);
+            console.log(`Error on adding students. Details: ${err}`);
         });
     };
-    
+
     return(
         <form onSubmit={onSubmitHandler}>
             <div>
@@ -60,16 +60,16 @@ const AvailableCourses = props =>{
             <table style={{margin: "auto"}}>
                 <tbody>
                 {
-                    props.availableCourses.map((course, i) => {
+                    props.availableStudents.map((student, i) => {
                         return(
                             <tr>
                                 <td>
                                 <CheckBox 
                                 key = {i} 
-                                item = {course}
-                                student = {false}
+                                item = {student}
+                                student = {true}
                                 checkedAll = {checkedAll}
-                                callBack = {addToSelectedCourses}
+                                callBack = {addToSelectedStudents}
                                 isLoaded = {isLoaded}
                                 setIsLoaded = {setIsLoaded}
                                 />
@@ -80,9 +80,9 @@ const AvailableCourses = props =>{
                 }
                 </tbody>
             </table>
-            <input type="submit" value="Enroll Classes" />
+            <input type="submit" value="Add Students" />
         </form>
     );
 };
 
-export default AvailableCourses;
+export default AvailableStudents;

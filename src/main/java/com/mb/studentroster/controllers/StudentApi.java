@@ -1,5 +1,6 @@
 package com.mb.studentroster.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,16 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mb.studentroster.models.Dorm;
 import com.mb.studentroster.models.Student;
+import com.mb.studentroster.services.DormServices;
 import com.mb.studentroster.services.StudentServices;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class StudentApi {
     private final StudentServices ss;
+    private final DormServices ds;
 
-    public StudentApi(StudentServices ss) {
+    public StudentApi(StudentServices ss, DormServices ds) {
         this.ss = ss;
+        this.ds = ds;
     }
 
     @RequestMapping("/api/students")
@@ -54,4 +59,35 @@ public class StudentApi {
     public void deleteStudent(@PathVariable("id") Long id) {
         ss.removeStudent(id);
     }
+    
+    @RequestMapping("/api/students/nodorm")
+    public List<Student> studentsNoDorm() {
+    	List<Student> allStudents = ss.allStudents();
+    	ArrayList<Student> studentsNoDorm = new ArrayList<Student>();
+    	
+    	for(Student s : allStudents) {
+    		if(s.getDorm() == null) {
+    			studentsNoDorm.add(s);
+    		}
+    	}
+    	return studentsNoDorm;
+    }
+    
+    @RequestMapping(value="/api/dorms/addstudents/{dormId}", method=RequestMethod.PATCH)
+	public List<List<Student>> addStudentsToDorm(@PathVariable("dormId") Long dormId, @RequestBody List<Long> selectedStudents){
+
+		Dorm theDorm = ds.findDorm(dormId);
+		
+		for (Long studentId : selectedStudents) {
+			Student studentToAdd = ss.findStudent(studentId);
+			studentToAdd.setDorm(theDorm);
+			ss.createOrUpdateStudent(studentToAdd);
+		}
+
+		ArrayList<List<Student>> ans = new ArrayList<List<Student>>();
+		ans.add(theDorm.getStudents());
+		ans.add(this.studentsNoDorm());
+
+		return ans;
+	}
 }

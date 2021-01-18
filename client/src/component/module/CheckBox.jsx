@@ -25,7 +25,12 @@ const CheckBox = props => {
             checked={isChecked}
             onChange={onChangeHandler}
             />
-            <span> {props.item.name}</span>
+            {
+                props.student?
+                <span> {props.item.firstName} {props.item.lastName}</span>
+                :
+                <span> {props.item.name}</span>
+            }
             </>
         }
         </>

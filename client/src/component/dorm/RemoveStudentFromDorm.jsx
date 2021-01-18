@@ -7,7 +7,7 @@ const RemoveStudentFromDorm = props => {
         e.preventDefault();
         axios.get("http://localhost:8080/api/dorms/removestudent/" + props.studentId)
         .then(res=>{
-            props.updateDom(props.studentId);
+            props.updateDom(res.data);
         })
         .catch(err=>{
             console.log("Error on removing student from dorm. Details: " + err);
