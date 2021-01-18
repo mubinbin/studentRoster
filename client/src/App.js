@@ -9,6 +9,7 @@ import NavBar from "./component/module/NavBar";
 import CreateOrEditStudent from "./component/student/CreateOrEditStudent.jsx";
 import CreateOrEditDorm from "./component/dorm/CreateOrEditDorm.jsx";
 import CreateOrEditCourse from "./component/course/CreateOrEditCourse.jsx";
+import AllCourses from "./component/course/AllCourses.jsx";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <StudentDetails path = "/students/:id" />
         <AllDorms path = "/dorms" />
         <DormDetails path = "/dorms/:id" />
+        <AllCourses path = "/courses" />
         <CourseDetails path ="/courses/:id" />
       </Router>
       </NavBar>

@@ -14,7 +14,7 @@ const AllDorms = props => {
             setIsLoaded(true);
         })
         .catch(err=>{
-            console.log("Error on getting all dormities. Details: " + err)
+            console.log("Error on getting all dormities. Details: " + err);
         });
 
         return ( () => {setAllDorms([])} )
