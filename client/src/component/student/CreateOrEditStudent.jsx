@@ -15,7 +15,6 @@ const CreateOrEditStudent = props =>{
 
 
     const addNewStudent = (student) => {
-        console.log(student);
         axios.post("http://localhost:8080/api/students/new", student)
         .then(res=>{
             navigate(`/students/${res.data.id}`);
@@ -23,7 +22,6 @@ const CreateOrEditStudent = props =>{
         .catch(err=>{
             console.log("Error on adding student. Details: " + err);
         });
-        console.log()
     };
 
     const editStudent = (student) => {

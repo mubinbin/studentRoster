@@ -15,6 +15,7 @@ const DormDetails = props => {
             setIsLoaded(true);
         })
         .catch(err=>{
+            console.log("Error on geting dorm information. Details: " + err);
         });
 
         return( ()=> {setCurDorm({});} );
@@ -27,7 +28,10 @@ const DormDetails = props => {
             isLoaded && 
                 <>
                 <DormDetailsShow dorm = {curDorm} />
-                <CreateOrEditDorm  curDorm = {curDorm} />
+                <CreateOrEditDorm  
+                curDorm = {curDorm} 
+                setCurDorm = {setCurDorm}
+                />
                 </>
         }
         </>
