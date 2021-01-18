@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {Link} from "@reach/router";
 import RemoveCourseStudent from "./RemoveCourseStudent.jsx";
+import CreateOrEditCourse from "./CreateOrEditCourse.jsx";
 
 const CourseDetails = props => {
 
@@ -36,6 +37,10 @@ const CourseDetails = props => {
 
                 <p><b>description: </b></p>
                 <p>{curCourse.description}</p>
+                <CreateOrEditCourse 
+                curCourse = {curCourse}
+                setCurCourse = {setCurCourse}
+                />
                 <hr/>
 
                 <h3>Student Enrolling: </h3>

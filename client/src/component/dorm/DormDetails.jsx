@@ -28,6 +28,7 @@ const DormDetails = props => {
             isLoaded && 
                 <>
                 <DormDetailsShow dorm = {curDorm} />
+                
                 <CreateOrEditDorm  
                 curDorm = {curDorm} 
                 setCurDorm = {setCurDorm}

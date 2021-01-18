@@ -80,4 +80,16 @@ public class CourseApi {
 
 		return ans;
 	}
+
+	@RequestMapping(value="/api/courses/new", method=RequestMethod.POST)
+	public Course newDorm(@RequestBody Course course){
+		return cs.createOrUpdateCourse(course);
+	}
+
+	@RequestMapping(value="/api/courses/{id}", method=RequestMethod.PATCH)
+	public Course eidtDorm(@PathVariable("id") Long id, @RequestBody Course course) {
+		Course courseToChange = cs.findCourseWithId(id);
+		courseToChange.setName(course.getName());	courseToChange.setDescription(course.getDescription());
+		return courseToChange;
+	}
 }

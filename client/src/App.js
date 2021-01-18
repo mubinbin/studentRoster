@@ -8,6 +8,7 @@ import CourseDetails from "./component/course/CourseDetails.jsx";
 import NavBar from "./component/module/NavBar";
 import CreateOrEditStudent from "./component/student/CreateOrEditStudent.jsx";
 import CreateOrEditDorm from "./component/dorm/CreateOrEditDorm.jsx";
+import CreateOrEditCourse from "./component/course/CreateOrEditCourse.jsx";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <NavBar>
       <div style={{display: "flex", justifyContent:"space-evenly"}}>
         <CreateOrEditStudent />
-        <CreateOrEditDorm />    
+        <CreateOrEditDorm />  
+        <CreateOrEditCourse />  
       </div>
       <Router>
         <AllStudents path = "/" />
