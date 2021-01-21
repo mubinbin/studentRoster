@@ -6,5 +6,6 @@ Two versions:
   1. Java Spring MVC (http://localhost:8080)
   2. Java Spring Boot back-end with React front-end (http://localhost:3000)
 
-Add Dockerfiles for frontend and backend.
-Made a yaml file which allows frontend, backend, and databases to be put into docker containers separately under the same newwork. App can be run in Docker.
+Add Dockerfile for frontend and backend, respectively.
+Made a yaml file which allows frontend, backend, and databases to be put into docker containers separately under the same newwork. 
+App can be run in Docker.
