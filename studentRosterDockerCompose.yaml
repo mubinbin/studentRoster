@@ -1,0 +1,60 @@
+# latest version of docker-compose
+version: "3.7" 
+
+services:
+  # equivalent (--name mysqldb) in docker run command
+  # database
+  mysqldb:
+    # pull from public "mysql" repo
+    image: mysql
+    restart: always
+    # equivalent (-p 3307:3306) in docker run command
+    ports:
+      - 3307:3306
+    # equivalent (-e MYSQL_ROOT_PASSWORD=root) in docker run command
+    environment:
+      MYSQL_DATABASE: student_roster
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    # named volume
+    volumes:
+      - srapp-data:/var/lib/mysql
+    networks:
+      - backend
+
+  # server
+  srapp_server:
+
+    image: studentrosterapp_server:1.0
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/student_roster?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - backend
+      - frontend
+
+  srapp_client:
+
+    image: studentrosterapp_client:1.0
+    ports:
+      - 80:80
+    depends_on:
+      - srapp_server
+    networks:
+      - frontend
+
+# Volumes
+volumes:
+  srapp-data:
+    driver: local
+
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
+  frontend:    
