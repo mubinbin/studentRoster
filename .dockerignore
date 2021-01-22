@@ -1,3 +1,4 @@
 client
 .dockerignore
 Dockerfile
+studentRosterDockerCompose.yaml

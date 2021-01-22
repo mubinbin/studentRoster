@@ -1,0 +1,50 @@
+version: "3.7" 
+
+services:
+  mysqldb:
+    image: mysql
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: student_roster
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - srapp-data:/var/lib/mysql
+    networks:
+      - backend
+
+  srapp_server:
+
+    image: bunxiibun/sr_app_backend:1.0
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/student_roster?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - backend
+      - frontend
+
+  srapp_client:
+
+    image: bunxiibun/sr_app_frontend:1.0
+    ports:
+      - 80:80
+    depends_on:
+      - srapp_server
+    networks:
+      - frontend
+
+volumes:
+  srapp-data:
+    driver: local
+
+networks:
+  backend:
+  frontend:    
