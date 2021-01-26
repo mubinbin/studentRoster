@@ -19,7 +19,7 @@ body{
 
 .App{
   height: 85%;
-  width: 60%;
+  width: 65%;
   display: flex;
   justify-content: space-between;
   position: absolute;
@@ -34,7 +34,6 @@ body{
   padding: 20px;
   z-index: 2;
   backdrop-filter: blur(2rem);
-    /* outline: solid 2px black; */
 }
 
 .nav-bar{
@@ -77,6 +76,15 @@ body{
   color: #174c91;
   font-weight: 600;
   opacity: 0.8;
-  font-size: 1.2rem;
   vertical-align: middle;
+  font-size: 1rem;
+}
+
+.show-all-info{
+  width: 100%;
+  height: 5%;
+  padding-top: 5%;
+  text-align: center;
+  /* color: rgb(238, 231, 231); */
+  /* background: rgb(212, 212, 212); */
 }

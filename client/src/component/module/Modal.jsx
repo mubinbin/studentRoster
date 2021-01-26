@@ -5,6 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import "./Modal.css";
 
 export default function Modal(props) {
     const [open, setOpen] = useState(false);
@@ -24,9 +25,35 @@ export default function Modal(props) {
         setOpen(false);
     };
 
+    const switchCase = (action) =>{
+        switch (action) {
+            case "Add New Student":
+                action = <i className="fas fa-user-plus fa-sm"></i>;
+                return action;
+            case "Edit Student":
+                action = <i className="fas fa-user-cog fa-sm"></i>;
+                return action;
+            case "Add New Dorm":
+                action = <i className="fas fa-home fa-sm"></i>;
+                return action;
+            case "Edit Dorm":
+                action = <i className="fas fa-cogs fa-sm"></i>;
+                return action;
+            case "Add New Course":
+                action = <i className="fas fa-laptop fa-sm"></i>;
+                return action;
+            case "Edit Course":
+                action = <i className="fas fa-laptop-code fa-sm"></i>;
+                return action;
+        }
+    }
+
     return (
-        <div>
-        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+        <div className="modal-btn">
+        {
+            switchCase(props.action)
+        }
+        <Button onClick={handleClickOpen}>
             <small>{props.action}</small>
         </Button>
         <Dialog
