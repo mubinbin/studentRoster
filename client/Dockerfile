@@ -17,6 +17,7 @@ RUN rm -rf /usr/share/nginx/html/*
 # RUN --from=build mv /app/build .
 COPY --from=build /app/build /usr/share/nginx/html
 
+# change all http://localhost:8080 to /
 RUN grep -rl localhost /usr/share/nginx/html | xargs sed -i 's/http:\/\/localhost:8080//g'
 
 COPY nginx.conf /etc/nginx/nginx.conf

@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    <div id="circle-1"></div>
+    <div id="circle-2"></div>
   </React.StrictMode>,
   document.getElementById('root')
 );

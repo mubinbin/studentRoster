@@ -14,21 +14,20 @@ import AllCourses from "./component/course/AllCourses.jsx";
 function App() {
   return (
     <div className="App">
+      
       <NavBar>
-      <div style={{display: "flex", justifyContent:"space-evenly"}}>
-        <CreateOrEditStudent />
-        <CreateOrEditDorm />  
-        <CreateOrEditCourse />  
-      </div>
-      <Router>
-        <AllStudents path = "/" />
-        <StudentDetails path = "/students/:id" />
-        <AllDorms path = "/dorms" />
-        <DormDetails path = "/dorms/:id" />
-        <AllCourses path = "/courses" />
-        <CourseDetails path ="/courses/:id" />
-      </Router>
+          <CreateOrEditStudent />
+          <CreateOrEditDorm />  
+          <CreateOrEditCourse />  
       </NavBar>
+      <Router className="main-container">
+          <AllStudents path = "/" />
+          <StudentDetails path = "/students/:id" />
+          <AllDorms path = "/dorms" />
+          <DormDetails path = "/dorms/:id" />
+          <AllCourses path = "/courses" />
+          <CourseDetails path ="/courses/:id" />
+      </Router>
     </div>
   );
 }
