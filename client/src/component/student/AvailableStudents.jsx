@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import CheckBox from "../module/CheckBox.jsx";
+import "./AvailableStudents.css";
 
 const AvailableStudents = props => {
 
@@ -53,34 +54,32 @@ const AvailableStudents = props => {
 
     return(
         <form onSubmit={onSubmitHandler}>
-            <div>
-                <input type="checkbox" checked={checkedAll} onChange={onChangeHandler} />
-                <span> Check All</span>
+            <div className="available-students-div1">
+                <p>
+                    <input type="checkbox" checked={checkedAll} onChange={onChangeHandler} />
+                    <b> Check All</b>
+                </p>
+                <input className="input-btn" type="submit" value="ADD STUDENT" />
             </div>
-            <table style={{margin: "auto"}}>
-                <tbody>
-                {
-                    props.availableStudents.map((student, i) => {
-                        return(
-                            <tr>
-                                <td>
-                                <CheckBox 
-                                key = {i} 
-                                item = {student}
-                                student = {true}
-                                checkedAll = {checkedAll}
-                                callBack = {addToSelectedStudents}
-                                isLoaded = {isLoaded}
-                                setIsLoaded = {setIsLoaded}
-                                />
-                                </td>
-                            </tr>
-                        );
-                    })
-                }
-                </tbody>
-            </table>
-            <input type="submit" value="ADD STUDENT" />
+            <div className="available-students-div2">
+            {
+                props.availableStudents.map((student, i) => {
+                    return(
+                        <p>
+                        <CheckBox 
+                        key = {i} 
+                        item = {student}
+                        student = {true}
+                        checkedAll = {checkedAll}
+                        callBack = {addToSelectedStudents}
+                        isLoaded = {isLoaded}
+                        setIsLoaded = {setIsLoaded}
+                        />
+                        </p>
+                    );
+                })
+            }
+            </div>
         </form>
     );
 };

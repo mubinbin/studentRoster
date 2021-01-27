@@ -43,7 +43,7 @@ const SelectDormForm = props =>{
         <form className="select-dorm-form" onSubmit = {onSubmitHandler}>
 
             <FormControl style={{minWidth: 200}}>
-                <InputLabel>Assign a Dormity</InputLabel>
+                <InputLabel>Assign a Dormitory</InputLabel>
                 <Select
                 name="dorm"
                 displayEmpty

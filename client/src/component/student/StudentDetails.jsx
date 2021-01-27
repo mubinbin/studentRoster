@@ -164,7 +164,7 @@ const StudentDetails = props =>{
             </div>
 
             <div className="dorm-box">
-                <h4>Dormity Information</h4>
+                <h4>Dormitory Information</h4>
                 { dorm && <DormDetailsShow dorm={dorm} /> }
                 
                 <SelectDormForm callBack = {assignDorm} dorm={dorm} curStudent={curStudent}/>

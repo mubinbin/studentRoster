@@ -15,7 +15,7 @@ const RemoveStudentFromDorm = props => {
     };
     
     return(
-        <button onClick = {removeStudentFromDorm}>
+        <button style={{"marginLeft":"10px"}} onClick = {removeStudentFromDorm}>
             REMOVE
         </button>
     );

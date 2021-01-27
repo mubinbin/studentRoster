@@ -80,7 +80,6 @@ const AvailableCourses = props =>{
                 })
             }
             </div>
-            
         </form>
     );
 };

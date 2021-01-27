@@ -62,7 +62,7 @@ const NavBar = props =>{
             
             <div
             style={ clickBg["2"] }
-            className="show-all-info"><i className="fas fa-bed fa-sm"></i> <Link style={clickColor["2"]} onClick={onClickHandler} name="2" to="/dorms">All Dormities</Link></div>
+            className="show-all-info"><i className="fas fa-bed fa-sm"></i> <Link style={clickColor["2"]} onClick={onClickHandler} name="2" to="/dorms">All Dormitories</Link></div>
         
             <div
             style={ clickBg["3"] }

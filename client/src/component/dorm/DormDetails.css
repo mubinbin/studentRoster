@@ -1,0 +1,61 @@
+#dorm-details-paper{
+    width: 90%;
+    max-height: 100%;
+    margin: auto;
+    background: none;
+    padding:15px 30px;
+    border-radius: 2rem;
+}
+
+.dorm-details-top{
+    text-align: start;
+    align-items: center;
+    border-bottom: honeydew solid 1px;
+    margin-bottom: 15px;
+}
+
+.dorm-details-top .top-1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dorm-details-top .top-2{
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.students-in-dorm{
+    text-align: left;
+    border-bottom: honeydew solid 1px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+    height: 200px;
+}
+.students-in-dorm h3{
+    margin-bottom: 5px;
+}
+.students-in-dorm .sid-div-1{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow-y: auto;
+    height: 80%;
+}
+
+.add-dorm-student{
+    text-align: left;
+    border-bottom: honeydew solid 1px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    height: 200px;
+}
+.add-dorm-student h3{
+    margin-bottom: 5px;
+}
+
+.display-sid{
+    overflow: auto;
+    height: 80%;
+}

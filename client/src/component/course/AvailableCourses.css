@@ -5,6 +5,11 @@
     margin-bottom: 5px;
 }
 
+.available-courses-div1 p{
+    height: 25px;
+    padding: 3px;
+}
+
 .available-courses-div2{
     display: grid;
     grid-template-columns: repeat(3, 1fr);

@@ -38,13 +38,13 @@ export default function Modal(props) {
                 action = <i className="fas fa-home fa-sm"></i>;
                 return action;
             case "Edit Dorm":
-                action = <i className="fas fa-cogs fa-sm"></i>;
+                action = <i className="fas fa-cogs fa-xs"></i>;
                 return action;
             case "Add New Course":
                 action = <i className="fas fa-laptop fa-sm"></i>;
                 return action;
             case "Edit Course":
-                action = <i className="fas fa-laptop-code fa-sm"></i>;
+                action = <i className="fas fa-laptop-code fa-xs"></i>;
                 return action;
         }
     }

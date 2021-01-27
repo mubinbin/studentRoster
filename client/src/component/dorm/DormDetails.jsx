@@ -5,6 +5,8 @@ import CreateOrEditDorm from "./CreateOrEditDorm.jsx";
 import {Link} from "@reach/router";
 import RemoveStudentFromDorm from "./RemoveStudentFromDorm.jsx";
 import AvailableStudents from "../student/AvailableStudents.jsx";
+import Paper from '@material-ui/core/Paper';
+import "./DormDetails.css";
 
 const DormDetails = props => {
 
@@ -49,58 +51,66 @@ const DormDetails = props => {
     };
 
     return(
-        <>
+        <Paper elevation={5} id="dorm-details-paper">
         {
             isLoaded && 
                 <>
-                <DormDetailsShow dorm = {curDorm} />
+                <h2>Dormitory Details: </h2>
                 
-                <CreateOrEditDorm  
-                curDorm = {curDorm} 
-                setCurDorm = {setCurDorm}
-                />
-                <hr/>
+                <div className="dorm-details-top">
+                    <div className="top-1">
+                        <DormDetailsShow dorm = {curDorm} />
 
-                <h3>Students in Dorm</h3>
-                {
-                    studentsInDorm.length === 0?
-                        <p>This Dormity is Empty</p>
-                        :
-                        <table style={{margin: "auto"}}>
-                            <tbody>
+                        <CreateOrEditDorm  
+                        curDorm = {curDorm} 
+                        setCurDorm = {setCurDorm}
+                        />
+                    </div>
+
+                    <p className="top-2"><b>Dorm Address: </b>{curDorm.address}</p>
+                </div>
+
+                <div className="students-in-dorm">
+                    <h3>Students in Dorm</h3>
+                    {
+                        studentsInDorm.length === 0?
+                            <p>This Dormity is Empty</p>
+                            :
+                            <div className="sid-div-1">
                             {
                                 studentsInDorm.map((student, i) => {
                                     return(
-                                        <tr>
-                                            <td><Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}</Link></td>
+                                        <p>
+                                        <Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}
+                                        </Link>
                                             
-                                            <td>
-                                                <RemoveStudentFromDorm
-                                                studentId = {student.id}
-                                                updateDom = {updateDom}
-                                                />
-                                            </td>
-                                        </tr>
+                                        <RemoveStudentFromDorm
+                                        studentId = {student.id}
+                                        updateDom = {updateDom}
+                                        />
+                                        </p>
                                     );
                                 })
                             }
-                            </tbody>
-                        </table>
-                        
-                }
-                <hr/>
+                            </div>
+                    }
+                </div>
 
-                <h3>Add Students to Dorm: </h3>
-                <AvailableStudents
-                items = "dorms"
-                itemId = {props.id}
-                setNotAvailableStudents = {setStudentsInDorm}
-                setAvailableStudents = {setStudentHaveNoDorm}
-                availableStudents = {studentsHaveNoDorm}
-                />
+                <div className="add-dorm-student">
+                    <h3>Add Students to Dorm: </h3>
+                    <div className="display-sid">
+                        <AvailableStudents
+                        items = "dorms"
+                        itemId = {props.id}
+                        setNotAvailableStudents = {setStudentsInDorm}
+                        setAvailableStudents = {setStudentHaveNoDorm}
+                        availableStudents = {studentsHaveNoDorm}
+                        />
+                    </div>
+                </div>
                 </>
         }
-        </>
+        </Paper>
     );
 
 };
