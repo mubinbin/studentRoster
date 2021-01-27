@@ -4,6 +4,8 @@ import {Link} from "@reach/router";
 import RemoveCourseStudent from "./RemoveCourseStudent.jsx";
 import CreateOrEditCourse from "./CreateOrEditCourse.jsx";
 import AvailableStudents from "../student/AvailableStudents.jsx";
+import Paper from "@material-ui/core/Paper";
+import "./CourseDetails.css";
 
 const CourseDetails = props => {
 
@@ -44,63 +46,68 @@ const CourseDetails = props => {
     };
 
     return(
-        <>
+        <Paper elevation={5} id="course-details-paper">
         {
             isLoaded &&
                 <>
-                <h1>{curCourse.name}</h1>
+                <h2>Class Details: </h2>
 
-                <p><b>description: </b></p>
-                <p>{curCourse.description}</p>
-                <CreateOrEditCourse 
-                curCourse = {curCourse}
-                setCurCourse = {setCurCourse}
-                />
-                <hr/>
+                <div className="course-details-top">
+                    <div className="top-1">
+                        <h3>{curCourse.name}</h3>
 
-                <h3>Students Enrolling: </h3>
-                {
-                    enrollingStudents.length === 0?
-                    <p>This class has no students yet</p>
-                    :
-                    <table style={{margin: "auto"}}>
-                        <tbody>
-                        {
-                            enrollingStudents.map((student, i)=>{
-                                return(
-                                    <tr>
-                                        <td key={i}>
+                        <CreateOrEditCourse 
+                        curCourse = {curCourse}
+                        setCurCourse = {setCurCourse}
+                        />
+                    </div>
+
+                    <p className="top-2"><b>Description: </b></p>
+                    <p className="top-3">{curCourse.description}</p>
+                </div>
+
+                <div className="students-in-class">
+                    <h3>Students Enrolling: </h3>
+                    {
+                        enrollingStudents.length === 0?
+                            <p>This class has no students yet</p>
+                            :
+                            <div className="sic-div-1">
+                            {
+                                enrollingStudents.map((student, i)=>{
+                                    return(
+                                        <p key={i}>
                                             <Link to={"/students/" + student.id}>{student.firstName} {student.lastName}</Link>
-                                        </td>
                                             
-                                        <td>
                                             <RemoveCourseStudent 
                                             studentId={student.id} 
                                             courseId={props.id} 
                                             updateDom={updateDom} 
                                             fromStudentDetails={false}
                                             />
-                                        </td>
-                                    </tr>
-                                );
-                            })
-                        }
-                        </tbody>
-                    </table>
-                }
+                                        </p>
+                                    );
+                                })
+                            }
+                            </div>
+                    }
+                </div>
 
-                <h3>Add Students to Class: </h3>
-                <AvailableStudents
-                items = "courses"
-                itemId = {props.id}
-                setNotAvailableStudents = {setEnrollingStudent}
-                setAvailableStudents = {setStudentNotEnrolling}
-                availableStudents = {studentNotEnrolling}
-                />
+                <div className="add-class-student">
+                    <h3>Add Students to Class: </h3>
+                    <div className="display-sic">
+                        <AvailableStudents
+                        items = "courses"
+                        itemId = {props.id}
+                        setNotAvailableStudents = {setEnrollingStudent}
+                        setAvailableStudents = {setStudentNotEnrolling}
+                        availableStudents = {studentNotEnrolling}
+                        />
+                    </div>
+                </div>
                 </>
-
         }
-        </>
+        </Paper>
     );
 };
 

@@ -80,7 +80,7 @@ const DormDetails = props => {
                             {
                                 studentsInDorm.map((student, i) => {
                                     return(
-                                        <p>
+                                        <p key={i}>
                                         <Link to={`/students/${student.id}`}>{student.firstName} {student.lastName}
                                         </Link>
                                             

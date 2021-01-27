@@ -180,7 +180,7 @@ const StudentDetails = props =>{
                     {
                         enrolledCourses.map((course, i)=>{
                             return(
-                                <p>
+                                <p key={i}>
                                 <Link style={{marginRight:'10px'}} to={"/courses/" + course.id}>{course.name}</Link>
 
                                 <RemoveCourseStudent

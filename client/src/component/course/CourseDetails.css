@@ -1,0 +1,66 @@
+#course-details-paper{
+    width: 90%;
+    max-height: 100%;
+    margin: auto;
+    background: none;
+    padding:15px 30px;
+    border-radius: 2rem;
+}
+
+.course-details-top{
+    text-align: start;
+    align-items: center;
+    border-bottom: honeydew solid 1px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+.course-details-top .top-1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.course-details-top .top-3{
+    margin-left: 20px;
+    word-wrap: break-word;
+    padding: 5px 10px;
+    height: 60px;
+    overflow: auto;
+}
+
+.students-in-class{
+    text-align: left;
+    border-bottom: honeydew solid 1px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+    height: 175px
+}
+.students-in-class h3{
+    margin-bottom: 5px;
+}
+.students-in-class .sic-div-1{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow-y: auto;
+    height: 80%;
+}
+.sic-div-1 p{
+    padding: 5px;
+}
+
+.add-class-student{
+    text-align: left;
+    border-bottom: honeydew solid 1px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    height: 175px;
+}
+.add-class-student h3{
+    margin-bottom: 5px;
+}
+
+.display-sic{
+    overflow: auto;
+    height: 80%;
+}
