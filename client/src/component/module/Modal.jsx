@@ -32,7 +32,7 @@ export default function Modal(props) {
                 action = <i className="fas fa-user-plus fa-sm"></i>;
                 return action;
             case "Edit Student":
-                action = <i class="fas fa-user-edit fa-sm"></i>;
+                action = <i class="fas fa-user-edit fa-xs"></i>;
                 return action;
             case "Add New Dorm":
                 action = <i className="fas fa-home fa-sm"></i>;

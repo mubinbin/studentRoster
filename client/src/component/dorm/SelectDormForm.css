@@ -1,11 +1,11 @@
-form{
+.select-dorm-form{
     display: flex;
     /* justify-content: space-around; */
     align-items: flex-end;
     margin-left: 20px;
 }
 
-small input{
+.sdf-small input{
     width: 100px;
     height: 32px;
     margin-left: 25px;

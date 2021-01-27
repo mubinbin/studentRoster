@@ -8,8 +8,8 @@ const StudentContactInforDetails = props => {
         <p className="home-address"><b>Home Address:</b> {props.contactIfo.homeAddress}</p>
 
         <div className="email-phone">
-            <p><b>Email:</b> {props.contactIfo.email}</p>
-            <p><b>Phone:</b> {props.contactIfo.phone}</p>
+            <p id="email"><b>Email:</b> {props.contactIfo.email}</p>
+            <p id="phone"><b>Phone:</b> {props.contactIfo.phone}</p>
         </div>
         </>
     );

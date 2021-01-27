@@ -14,7 +14,7 @@ import "./StudentTable.css";
 const columns = [
     { id: 'name', label: 'Student Name', minWidth: 80, fontWeight: "bold" },
     { id: 'age', label: 'Age', minWidth: 80, fontWeight: "bold" },
-    { id: 'actions', label: 'Assigned a Dromity?', minWidth: 100, fontWeight: "bold" },
+    { id: 'actions', label: 'Assigned a Dromity?', minWidth: 80, fontWeight: "bold" },
 ];
 
 const useStyles = makeStyles({
@@ -22,19 +22,13 @@ const useStyles = makeStyles({
         width: '100%',
         height: '100%',
         background: 'none',
-        margin: 'auto',
         borderRadius: '2rem',
     },
     container: {
         height: "100%",
         background: 'none',
         textAlign:'center',
-    },
-    pagination: {
-        width: "100%",
-        height: "33",
     }
-
 });
 
 export default function StudentTable(props) {
@@ -58,7 +52,7 @@ export default function StudentTable(props) {
         <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
             <TableHead>
-                <TableRow style={{"height":"33"}}>
+                <TableRow>
                 {columns.map((column) => (
                     <TableCell
                     key={column.id}
@@ -79,9 +73,9 @@ export default function StudentTable(props) {
             <TableBody>
                 {props.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((student) => {
                 return (
-                    <TableRow style={{"height":"33"}} hover role="checkbox" tabIndex={-1} key={student.id}>
-                        <TableCell style={{padding: "8px", textAlign: 'center'}}><Link style={{textDecoration:'none'}} to = {"/students/" + student.id}>{student.firstName} {student.lastName}</Link></TableCell>
-                        <TableCell style={{padding: "8px", textAlign: 'center'}}>{student.age}</TableCell>
+                    <TableRow hover role="checkbox" tabIndex={-1} key={student.id}>
+                        <TableCell style={{padding: "10px", textAlign: 'center'}}><Link style={{textDecoration:'none'}} to = {"/students/" + student.id}>{student.firstName} {student.lastName}</Link></TableCell>
+                        <TableCell style={{padding: "10px", textAlign: 'center'}}>{student.age}</TableCell>
                         <TableCell style={{padding: "10px", textAlign: 'center'}}>
                             {
                                 student.dorm === null? 
@@ -95,9 +89,9 @@ export default function StudentTable(props) {
                 })}
             </TableBody>
             </Table>
+        </TableContainer>
         <TablePagination
-            className={classes.pagination}
-            rowsPerPageOptions={[10, 25, 100]}
+            rowsPerPageOptions={10}
             component="div"
             count={props.data.length}
             rowsPerPage={rowsPerPage}
@@ -105,7 +99,6 @@ export default function StudentTable(props) {
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
         />
-        </TableContainer>
         </Paper>
     );
 }

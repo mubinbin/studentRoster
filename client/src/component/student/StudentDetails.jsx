@@ -130,13 +130,13 @@ const StudentDetails = props =>{
             
             isLoaded && (
             <>
-            <h1>Student Details: </h1>
+            <h2>Student Details: </h2>
 
             <div className="name">
                 <h2>{curStudent.firstName} {curStudent.lastName}</h2>
                 <p><b>Age: </b>{curStudent.age}</p>
                 <div>
-                    <IconButton title="Delete" color="secondary" onClick={deleteStudent}><i className="fas fa-trash-alt fa-sm"></i></IconButton>
+                    <IconButton title="Delete" color="secondary" onClick={deleteStudent}><i className="fas fa-trash-alt fa-xs"></i></IconButton>
 
                     <CreateOrEditStudent
                     curStudent = {curStudent}
@@ -146,7 +146,7 @@ const StudentDetails = props =>{
             </div>
 
             <div className="contact-info-box">
-                <h3>Contact Information</h3>
+                <h4>Contact Information</h4>
                 {
                     contactinfo?
                         <StudentContactInfoAddAndShow 
@@ -164,14 +164,14 @@ const StudentDetails = props =>{
             </div>
 
             <div className="dorm-box">
-                <h3>Dormity Information</h3>
+                <h4>Dormity Information</h4>
                 { dorm && <DormDetailsShow dorm={dorm} /> }
                 
                 <SelectDormForm callBack = {assignDorm} dorm={dorm} curStudent={curStudent}/>
             </div>
 
             <div className="enroll-classes-box">
-                <h3>Enrolled Classes: </h3>
+                <h4>Enrolled Classes: </h4>
                 {
                     enrolledCourses.length ===0 ?
                     <p>No enrolling classes yet</p>
@@ -197,16 +197,18 @@ const StudentDetails = props =>{
                 }
             </div>
             
-            <div className="add-classes">
-                <h3>Add Classes to Student</h3>
+            <div className="add-classes-box">
+                <h4>Add Classes to Student</h4>
                 {
                     availableCourses?
+                    <div className="display-ac">
                         <AvailableCourses 
                         studentId = {props.id} 
                         setEnrolledCourses = {setEnrolledCourses}
                         setAvailableCourses = {setAvailableCourses}
                         availableCourses = {availableCourses}
                         />
+                    </div>
                         :
                         <p>No Class Avaiable at This Time</p>
                 }

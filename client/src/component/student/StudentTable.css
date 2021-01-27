@@ -15,3 +15,7 @@
     background-color: rgba(126, 190, 126, 0.87);
     color: rgba(255, 255, 255, 0.87);
 }
+
+.MuiTablePagination-toolbar {
+    min-height: 33px;
+}

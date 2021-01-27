@@ -6,7 +6,7 @@ const DormDetailsShow = props => {
 
     return(
         <>
-        <p><b>Dormity Name: </b><Link to = {"/dorms/" + props.dorm.id}>{props.dorm.name}</Link></p>
+        <p className="dorm-details-name"><b>Dormity Name: </b><Link to = {"/dorms/" + props.dorm.id}>{props.dorm.name}</Link></p>
         </>
     );
 };

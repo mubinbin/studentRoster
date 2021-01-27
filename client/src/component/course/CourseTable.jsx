@@ -63,6 +63,7 @@ export default function CourseTable(props) {
                         background: "none",
                         color: "#07336d",
                         textAlign:"center",
+                        padding: "8px",
                     }}
                     >
                     {column.label}
@@ -74,9 +75,9 @@ export default function CourseTable(props) {
                 {props.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((course) => {
                 return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={course.id}>
-                        <TableCell style={{textAlign: 'center'}}><Link style={{textDecoration:'none'}} to = {"/courses/" + course.id}>{course.name}</Link></TableCell>
-                        <TableCell style={{textAlign: 'center'}}>{course.students.length}</TableCell>
-                        <TableCell style={{textAlign: 'center'}}>
+                        <TableCell style={{padding: "10px", textAlign: 'center'}}><Link style={{textDecoration:'none'}} to = {"/courses/" + course.id}>{course.name}</Link></TableCell>
+                        <TableCell style={{padding: "10px", textAlign: 'center'}}>{course.students.length}</TableCell>
+                        <TableCell style={{padding: "10px", textAlign: 'center'}}>
                             <Delete 
                             callBack = {props.callBack}
                             items = "courses"
@@ -90,7 +91,7 @@ export default function CourseTable(props) {
             </Table>
         </TableContainer>
         <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
+            rowsPerPageOptions={10}
             component="div"
             count={props.data.length}
             rowsPerPage={rowsPerPage}

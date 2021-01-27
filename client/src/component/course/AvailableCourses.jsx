@@ -54,34 +54,33 @@ const AvailableCourses = props =>{
     
     return(
         <form onSubmit={onSubmitHandler}>
-            <div>
-                <input type="checkbox" checked={checkedAll} onChange={onChangeHandler} />
-                <span> Check All</span>
+            <div className="available-courses-div1">
+                <p>
+                    <input type="checkbox" checked={checkedAll} onChange={onChangeHandler} />
+                    <b> Check All</b>
+                </p>
+                <input className="input-btn" type="submit" value="ENROLL CLASSES" />
             </div>
-            <table style={{margin: "auto"}}>
-                <tbody>
-                {
-                    props.availableCourses.map((course, i) => {
-                        return(
-                            <tr>
-                                <td>
-                                <CheckBox 
-                                key = {i} 
-                                item = {course}
-                                student = {false}
-                                checkedAll = {checkedAll}
-                                callBack = {addToSelectedCourses}
-                                isLoaded = {isLoaded}
-                                setIsLoaded = {setIsLoaded}
-                                />
-                                </td>
-                            </tr>
-                        );
-                    })
-                }
-                </tbody>
-            </table>
-            <input type="submit" value="ENROLL CLASSES" />
+            <div className="available-courses-div2">
+            {
+                props.availableCourses.map((course, i) => {
+                    return(
+                        <p>
+                            <CheckBox 
+                            key = {i} 
+                            item = {course}
+                            student = {false}
+                            checkedAll = {checkedAll}
+                            callBack = {addToSelectedCourses}
+                            isLoaded = {isLoaded}
+                            setIsLoaded = {setIsLoaded}
+                            />
+                        </p>
+                    );
+                })
+            }
+            </div>
+            
         </form>
     );
 };

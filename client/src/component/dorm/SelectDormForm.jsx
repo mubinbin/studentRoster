@@ -40,7 +40,7 @@ const SelectDormForm = props =>{
 
     return(
 
-        <form onSubmit = {onSubmitHandler}>
+        <form className="select-dorm-form" onSubmit = {onSubmitHandler}>
 
             <FormControl style={{minWidth: 200}}>
                 <InputLabel>Assign a Dormity</InputLabel>
@@ -56,7 +56,7 @@ const SelectDormForm = props =>{
                     })}
                 </Select>
             </FormControl>
-            <small><input type="submit" value="ASSIGN"/></small>
+            <small className="sdf-small"><input type="submit" value="ASSIGN"/></small>
         </form>
 
     );

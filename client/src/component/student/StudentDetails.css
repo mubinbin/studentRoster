@@ -1,15 +1,14 @@
 #student-details-paper{
     width: 90%;
-    height: 100%;
+    max-height: 100%;
     margin: auto;
     background: none;
-    padding: 20px;
+    padding:15px 30px;
     border-radius: 2rem;
 }
 
-h1{
+h2{
     text-align: start;
-    margin-bottom: 15px;
 }
 
 .name{
@@ -18,14 +17,14 @@ h1{
     justify-content: space-between;
     align-items: center;
     border-bottom: honeydew solid 1px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .contact-info-box{
     text-align: left;
     border-bottom: honeydew solid 1px;
     margin-left: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
 }
 
@@ -33,10 +32,10 @@ h1{
     text-align: left;
     border-bottom: honeydew solid 1px;
     margin-left: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
 }
-.dorm-box h3{
+.dorm-box h4{
     margin-bottom: 5px;
 }
 
@@ -44,10 +43,11 @@ h1{
     text-align: left;
     border-bottom: honeydew solid 1px;
     margin-left: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
+    height: 68px;
 }
-.enroll-classes-box h3{
+.enroll-classes-box h4{
     margin-bottom: 5px;
 }
 
@@ -55,18 +55,33 @@ h1{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     overflow: auto;
+    height: 75%;
 }
+
 .display-enrolled-classes p{
     display: flex;
 }
 
-.add-classes{
+.add-classes-box{
     text-align: left;
     border-bottom: honeydew solid 1px;
     margin-left: 20px;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
+    /* margin-bottom: 15px;
+    padding-bottom: 10px; */
+    height: 110px;
 }
+
+.display-ac{
+    overflow: auto;
+    height: 75%;
+}
+
+.add-classes-box h4{
+    margin-bottom: 5px;
+}
+
+
+
 
 
 

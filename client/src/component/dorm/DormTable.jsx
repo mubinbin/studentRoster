@@ -53,7 +53,7 @@ export default function DormTable(props) {
         <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
             <TableHead>
-                <TableRow style={{"height":"33px"}}>
+                <TableRow>
                 {columns.map((column) => (
                     <TableCell
                     key={column.id}
@@ -63,6 +63,7 @@ export default function DormTable(props) {
                         background: "none",
                         color: "#07336d",
                         textAlign:"center",
+                        padding: "8px",
                     }}
                     >
                     {column.label}
@@ -71,12 +72,12 @@ export default function DormTable(props) {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {props.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((dorm) => {
+                {props.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((dorm, i) => {
                 return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={dorm.id}>
-                        <TableCell style={{textAlign: 'center'}}><Link style={{textDecoration:'none'}} to = {"/dorms/" + dorm.id}>{dorm.name}</Link></TableCell>
-                        <TableCell style={{textAlign: 'center'}}>{dorm.students.length}</TableCell>
-                        <TableCell style={{textAlign: 'center'}}>
+                        <TableCell style={{padding: "10px", textAlign: 'center'}}><Link style={{textDecoration:'none'}} to = {"/dorms/" + dorm.id}>{dorm.name}</Link></TableCell>
+                        <TableCell style={{padding: "10px", textAlign: 'center'}}>{dorm.students.length}</TableCell>
+                        <TableCell style={{padding: "10px", textAlign: 'center'}}>
                             <Delete 
                             callBack={props.callBack}
                             items="dorms" 
@@ -90,7 +91,7 @@ export default function DormTable(props) {
             </Table>
         </TableContainer>
         <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
+            rowsPerPageOptions={10}
             component="div"
             count={props.data.length}
             rowsPerPage={rowsPerPage}
