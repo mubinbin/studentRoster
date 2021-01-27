@@ -12,17 +12,23 @@ import {Link} from "@reach/router";
 import Delete from "../module/Delete.jsx";
 
 const columns = [
-    { id: 'name', label: 'Dorm Name', minWidth: 100, fontWeight: "bold"},
-    { id: 'students', label: 'Total Students', minWidth: 100, fontWeight: "bold"},
-    { id: 'actions', label: 'Action', minWidth: 170, fontWeight: "bold" },
+    { id: 'name', label: 'Dorm Name', minWidth: 80, fontWeight: "bold"},
+    { id: 'students', label: 'Total Students', minWidth: 80, fontWeight: "bold"},
+    { id: 'actions', label: 'Action', minWidth: 80, fontWeight: "bold" },
 ];
 
 const useStyles = makeStyles({
     root: {
-        width: '100%',
+        width: '80%',
+        height: '100%',
+        background: 'none',
+        margin: 'auto',
+        borderRadius: '2rem',
     },
     container: {
-        maxHeight: "100vh",
+        height: "100%",
+        background: 'none',
+        textAlign:'center',
     },
 });
 
@@ -43,15 +49,21 @@ export default function DormTable(props) {
     
 
     return (
-        <Paper className={classes.root}>
+        <Paper elevation={5} className={classes.root}>
         <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
             <TableHead>
-                <TableRow>
+                <TableRow style={{"height":"33px"}}>
                 {columns.map((column) => (
                     <TableCell
                     key={column.id}
-                    style={{ minWidth: column.minWidth, fontWeight: column.fontWeight }}
+                    style={{ 
+                        minWidth: column.minWidth,
+                        fontWeight: column.fontWeight,
+                        background: "none",
+                        color: "#07336d",
+                        textAlign:"center",
+                    }}
                     >
                     {column.label}
                     </TableCell>
@@ -62,9 +74,9 @@ export default function DormTable(props) {
                 {props.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((dorm) => {
                 return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={dorm.id}>
-                        <TableCell><Link to = {"/dorms/" + dorm.id}>{dorm.name}</Link></TableCell>
-                        <TableCell>{dorm.students.length}</TableCell>
-                        <TableCell>
+                        <TableCell style={{textAlign: 'center'}}><Link style={{textDecoration:'none'}} to = {"/dorms/" + dorm.id}>{dorm.name}</Link></TableCell>
+                        <TableCell style={{textAlign: 'center'}}>{dorm.students.length}</TableCell>
+                        <TableCell style={{textAlign: 'center'}}>
                             <Delete 
                             callBack={props.callBack}
                             items="dorms" 

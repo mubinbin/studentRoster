@@ -1,0 +1,17 @@
+.assign-dorm-yes, .assign-dorm-no{
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    border-radius: 5px;
+    font-weight: 400;
+}
+
+.assign-dorm-no{
+    background-color: rgba(223, 84, 84, 0.815);
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.assign-dorm-yes{
+    background-color: rgba(126, 190, 126, 0.87);
+    color: rgba(255, 255, 255, 0.87);
+}

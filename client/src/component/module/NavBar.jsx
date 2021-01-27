@@ -5,7 +5,7 @@ import {Link} from "@reach/router";
 const NavBar = props =>{
     
     const initialStateBackground = {
-        "1": {'backgroundColor':' rgba(71, 58, 58, 0.7)', 'color':'white'}, 
+        "1": {'backgroundColor':' rgba(71, 58, 58, 0.7)', 'color':'white', 'borderRadius':'10px'}, 
         "2": {}, 
         "3": {}
     };
@@ -27,7 +27,7 @@ const NavBar = props =>{
                 break;
             case "2":
                 setClickBg({
-                    "2":{'backgroundColor':' rgba(71, 58, 58, 0.7)', 'color':'white'},
+                    "2":{'backgroundColor':' rgba(71, 58, 58, 0.7)', 'color':'white', 'borderRadius':'10px'},
                     "1":{},
                     "3":{}
                 });
@@ -39,7 +39,7 @@ const NavBar = props =>{
                 break;
             case "3":
                 setClickBg({
-                    "3":{'backgroundColor':' rgba(71, 58, 58, 0.7)', 'color':'white'},
+                    "3":{'backgroundColor':' rgba(71, 58, 58, 0.7)', 'color':'white', 'borderRadius':'10px'},
                     "1":{},
                     "2":{}
                 });

@@ -9,20 +9,32 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import {Link} from "@reach/router";
+import "./StudentTable.css";
 
 const columns = [
-    { id: 'name', label: 'Student Name', minWidth: 100, fontWeight: "bold"},
-    { id: 'age', label: 'Age', minWidth: 170, fontWeight: "bold" },
-    { id: 'actions', label: 'Assigned a Dromity?', minWidth: 170, fontWeight: "bold" },
+    { id: 'name', label: 'Student Name', minWidth: 80, fontWeight: "bold" },
+    { id: 'age', label: 'Age', minWidth: 80, fontWeight: "bold" },
+    { id: 'actions', label: 'Assigned a Dromity?', minWidth: 100, fontWeight: "bold" },
 ];
 
 const useStyles = makeStyles({
     root: {
         width: '100%',
+        height: '100%',
+        background: 'none',
+        margin: 'auto',
+        borderRadius: '2rem',
     },
     container: {
-        maxHeight: "100vh",
+        height: "100%",
+        background: 'none',
+        textAlign:'center',
     },
+    pagination: {
+        width: "100%",
+        height: "33",
+    }
+
 });
 
 export default function StudentTable(props) {
@@ -42,15 +54,22 @@ export default function StudentTable(props) {
     
 
     return (
-        <Paper className={classes.root}>
+        <Paper elevation={5} className={classes.root}>
         <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
             <TableHead>
-                <TableRow>
+                <TableRow style={{"height":"33"}}>
                 {columns.map((column) => (
                     <TableCell
                     key={column.id}
-                    style={{ minWidth: column.minWidth, fontWeight: column.fontWeight }}
+                    style={{ 
+                        minWidth: column.minWidth,
+                        fontWeight: column.fontWeight,
+                        background: "none",
+                        color: "#07336d",
+                        textAlign:"center",
+                        padding: "8px",
+                    }}
                     >
                     {column.label}
                     </TableCell>
@@ -60,12 +79,15 @@ export default function StudentTable(props) {
             <TableBody>
                 {props.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((student) => {
                 return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={student.id}>
-                        <TableCell><Link to = {"/students/" + student.id}>{student.firstName} {student.lastName}</Link></TableCell>
-                        <TableCell>{student.age}</TableCell>
-                        <TableCell>
+                    <TableRow style={{"height":"33"}} hover role="checkbox" tabIndex={-1} key={student.id}>
+                        <TableCell style={{padding: "8px", textAlign: 'center'}}><Link style={{textDecoration:'none'}} to = {"/students/" + student.id}>{student.firstName} {student.lastName}</Link></TableCell>
+                        <TableCell style={{padding: "8px", textAlign: 'center'}}>{student.age}</TableCell>
+                        <TableCell style={{padding: "10px", textAlign: 'center'}}>
                             {
-                                student.dorm === null? "No" : "Yes"
+                                student.dorm === null? 
+                                <p className="assign-dorm-no">NO</p>
+                                :
+                                <p className="assign-dorm-yes">YES</p>
                             }
                         </TableCell>
                     </TableRow>
@@ -73,8 +95,8 @@ export default function StudentTable(props) {
                 })}
             </TableBody>
             </Table>
-        </TableContainer>
         <TablePagination
+            className={classes.pagination}
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
             count={props.data.length}
@@ -83,6 +105,7 @@ export default function StudentTable(props) {
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
         />
+        </TableContainer>
         </Paper>
     );
 }

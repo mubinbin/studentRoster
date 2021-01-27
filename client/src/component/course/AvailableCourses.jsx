@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import CheckBox from "../module/CheckBox.jsx";
+import "./AvailableCourses.css";
 
 const AvailableCourses = props =>{
 

@@ -6,6 +6,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import "./Modal.css";
+import IconButton from '@material-ui/core/IconButton';
 
 export default function Modal(props) {
     const [open, setOpen] = useState(false);
@@ -31,7 +32,7 @@ export default function Modal(props) {
                 action = <i className="fas fa-user-plus fa-sm"></i>;
                 return action;
             case "Edit Student":
-                action = <i className="fas fa-user-cog fa-sm"></i>;
+                action = <i class="fas fa-user-edit fa-sm"></i>;
                 return action;
             case "Add New Dorm":
                 action = <i className="fas fa-home fa-sm"></i>;
@@ -49,13 +50,19 @@ export default function Modal(props) {
     }
 
     return (
-        <div className="modal-btn">
+        <>
         {
-            switchCase(props.action)
+            props.action.includes("Edit")?
+            <IconButton title="Edit" color="primary" onClick={handleClickOpen}>
+                {switchCase(props.action)}
+            </IconButton>
+            :
+            <div className="modal-btn">
+                <Button onClick={handleClickOpen}>
+                    <small>{switchCase(props.action)} {props.action}</small>
+                </Button>
+            </div>
         }
-        <Button onClick={handleClickOpen}>
-            <small>{props.action}</small>
-        </Button>
         <Dialog
             fullScreen={fullScreen}
             open={open}
@@ -70,6 +77,6 @@ export default function Modal(props) {
             <Button onClick={handleClose} variant="contained" color="secondary">Cancle</Button>
             </DialogContent>
         </Dialog>
-        </div>
+        </>
     );
 };

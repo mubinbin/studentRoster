@@ -1,0 +1,73 @@
+#student-details-paper{
+    width: 90%;
+    height: 100%;
+    margin: auto;
+    background: none;
+    padding: 20px;
+    border-radius: 2rem;
+}
+
+h1{
+    text-align: start;
+    margin-bottom: 15px;
+}
+
+.name{
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: honeydew solid 1px;
+    margin-bottom: 15px;
+}
+
+.contact-info-box{
+    text-align: left;
+    border-bottom: honeydew solid 1px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.dorm-box{
+    text-align: left;
+    border-bottom: honeydew solid 1px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+.dorm-box h3{
+    margin-bottom: 5px;
+}
+
+.enroll-classes-box{
+    text-align: left;
+    border-bottom: honeydew solid 1px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+.enroll-classes-box h3{
+    margin-bottom: 5px;
+}
+
+.enroll-classes-box .display-enrolled-classes{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: auto;
+}
+.display-enrolled-classes p{
+    display: flex;
+}
+
+.add-classes{
+    text-align: left;
+    border-bottom: honeydew solid 1px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+
+
+

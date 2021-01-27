@@ -7,6 +7,9 @@ import {Link, navigate} from "@reach/router";
 import RemoveCourseStudent from "../course/RemoveCourseStudent.jsx";
 import AvailableCourses from "../course/AvailableCourses.jsx";
 import CreateOrEditStudent from "./CreateOrEditStudent.jsx";
+import Paper from '@material-ui/core/Paper';
+import "./StudentDetails.css";
+import IconButton from '@material-ui/core/IconButton';
 
 const StudentDetails = props =>{
 
@@ -122,95 +125,96 @@ const StudentDetails = props =>{
     };
 
     return(
-        <>
+        <Paper id="student-details-paper" elevation={5}>
         {
             
             isLoaded && (
             <>
-            <h1>{curStudent.firstName} {curStudent.lastName}</h1>
-            <p><b>Age: </b>{curStudent.age}</p>
+            <h1>Student Details: </h1>
 
-            <div>
-                <button onClick={deleteStudent}>DELETE STUDENT</button>
+            <div className="name">
+                <h2>{curStudent.firstName} {curStudent.lastName}</h2>
+                <p><b>Age: </b>{curStudent.age}</p>
+                <div>
+                    <IconButton title="Delete" color="secondary" onClick={deleteStudent}><i className="fas fa-trash-alt fa-sm"></i></IconButton>
+
+                    <CreateOrEditStudent
+                    curStudent = {curStudent}
+                    setCurStudent = {setCurStudent}
+                    />
+                </div>
             </div>
-            
-            <CreateOrEditStudent
-            curStudent = {curStudent}
-            setCurStudent = {setCurStudent}
-            />
-            
-            <hr/>
-            <h3>Contact Information</h3>
-            {
-                contactinfo?
-                    <StudentContactInfoAddAndShow 
-                    isNew={false} 
-                    callBack={updateContactInfo} 
-                    contactInfo={contactinfo}
-                    />
+
+            <div className="contact-info-box">
+                <h3>Contact Information</h3>
+                {
+                    contactinfo?
+                        <StudentContactInfoAddAndShow 
+                        isNew={false} 
+                        callBack={updateContactInfo} 
+                        contactInfo={contactinfo}
+                        />
+                        :
+                        <StudentContactInfoAddAndShow 
+                        isNew={true}
+                        callBack={addContactInfo} 
+                        contactInfo={newContactInfo}
+                        />
+                }
+            </div>
+
+            <div className="dorm-box">
+                <h3>Dormity Information</h3>
+                { dorm && <DormDetailsShow dorm={dorm} /> }
+                
+                <SelectDormForm callBack = {assignDorm} dorm={dorm} curStudent={curStudent}/>
+            </div>
+
+            <div className="enroll-classes-box">
+                <h3>Enrolled Classes: </h3>
+                {
+                    enrolledCourses.length ===0 ?
+                    <p>No enrolling classes yet</p>
                     :
-                    <StudentContactInfoAddAndShow 
-                    isNew={true}
-                    callBack={addContactInfo} 
-                    contactInfo={newContactInfo}
-                    />
-            }
-
-            <hr/>
-            <h3>Dormity Information</h3>
-            { dorm && <DormDetailsShow dorm={dorm} /> }
-            
-            <SelectDormForm callBack = {assignDorm} dorm={dorm} curStudent={curStudent}/>
-
-            <hr/>
-            <h3>Enrolled Classes: </h3>
-            {
-                enrolledCourses.length ===0 ?
-                <p>No enrolling classes yet</p>
-                :
-                <table style={{margin: "auto"}}>
-                    <tbody>
+                    <div className="display-enrolled-classes">
                     {
                         enrolledCourses.map((course, i)=>{
                             return(
-                                <tr>
-                                    <td key={i}>
-                                        <Link to={"/courses/" + course.id}>{course.name}</Link>
-                                    </td>
+                                <p>
+                                <Link style={{marginRight:'10px'}} to={"/courses/" + course.id}>{course.name}</Link>
 
-                                    <td>
-                                        <RemoveCourseStudent
-                                        studentId={props.id} 
-                                        courseId={course.id} 
-                                        updateDom={updateDom} 
-                                        fromStudentDetails={true}
-                                        />
-                                    </td>
-                                </tr>
+                                <RemoveCourseStudent
+                                studentId={props.id} 
+                                courseId={course.id} 
+                                updateDom={updateDom} 
+                                fromStudentDetails={true}
+                                />
+                                </p>
                             );
                         })
                     }
-                    </tbody>
-                </table>
-            }
-
-            <hr/>
-            <h3>Add Classes to Student</h3>
-            {
-                availableCourses?
-                    <AvailableCourses 
-                    studentId = {props.id} 
-                    setEnrolledCourses = {setEnrolledCourses}
-                    setAvailableCourses = {setAvailableCourses}
-                    availableCourses = {availableCourses}
-                    />
-                    :
-                    <p>No Class Avaiable at This Time</p>
-            }
+                    </div>
+                }
+            </div>
+            
+            <div className="add-classes">
+                <h3>Add Classes to Student</h3>
+                {
+                    availableCourses?
+                        <AvailableCourses 
+                        studentId = {props.id} 
+                        setEnrolledCourses = {setEnrolledCourses}
+                        setAvailableCourses = {setAvailableCourses}
+                        availableCourses = {availableCourses}
+                        />
+                        :
+                        <p>No Class Avaiable at This Time</p>
+                }
+            </div>
             </>
             )
         }
-        </>
+        </Paper>
     );
 }
 

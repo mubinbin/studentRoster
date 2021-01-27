@@ -38,6 +38,7 @@ body{
 
 .nav-bar{
   flex: 1;
+  /* width: 25%; */
   height: 100%;
   text-align: start;
   display: flex;
@@ -46,8 +47,10 @@ body{
 }
 
 .main-container{
-  flex:3;
+  flex:4;
+  /* width:75%; */
   align-self: center;
+  /* height: 100%; */
 }
 
 #circle-1, #circle-2{
@@ -64,7 +67,7 @@ body{
 
 #circle-1{
   top: 2%;
-  right: 15%;
+  right: 10%;
 }
 #circle-2{
   bottom: 2%;
@@ -73,7 +76,7 @@ body{
 
 .show-all-info, .show-all-info a{
   text-decoration: none;
-  color: #174c91;
+  color: #07336d;
   font-weight: 600;
   opacity: 0.8;
   vertical-align: middle;
@@ -83,7 +86,7 @@ body{
 .show-all-info{
   width: 100%;
   height: 5%;
-  padding-top: 5%;
+  padding-top: 2.5%;
   text-align: center;
   /* color: rgb(238, 231, 231); */
   /* background: rgb(212, 212, 212); */

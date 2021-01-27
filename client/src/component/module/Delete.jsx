@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import "./Delete.css";
 
 const Delete = props => {
 
@@ -16,7 +17,7 @@ const Delete = props => {
 
     return(
         <button onClick = {deleteEntry}>
-            DELETE
+            <i className="fas fa-trash-alt fa-lg"></i>
         </button>
     );
 };

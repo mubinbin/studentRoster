@@ -4,6 +4,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from "axios";
+import "./SelectDormForm.css";
 
 const SelectDormForm = props =>{
 
@@ -41,7 +42,7 @@ const SelectDormForm = props =>{
 
         <form onSubmit = {onSubmitHandler}>
 
-            <FormControl style={{minWidth: 200, marginBottom: "20px"}}>
+            <FormControl style={{minWidth: 200}}>
                 <InputLabel>Assign a Dormity</InputLabel>
                 <Select
                 name="dorm"
@@ -55,7 +56,6 @@ const SelectDormForm = props =>{
                     })}
                 </Select>
             </FormControl>
-            <br/>
             <small><input type="submit" value="ASSIGN"/></small>
         </form>
 
