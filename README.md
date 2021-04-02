@@ -1,6 +1,6 @@
 # Student Roster with Docker
 
-Full stack web app which can help admin staff to manage students contacting infomation, assign/remove dormity, enroll/remove classes
+Full stack web app which can help admin staff to manage students contacting information, assign/remove dormitory, enroll/remove classes
 
 Two versions: 
   1. Java Spring MVC (http://localhost:8080)
